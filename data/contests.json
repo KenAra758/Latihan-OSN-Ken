@@ -1,16 +1,7 @@
 {
-  "updatedAt": "2026-10-12T03:42:24.766Z",
+  "updatedAt": "2026-10-12T22:43:04.659Z",
   "failed": [],
   "contests": [
-    {
-      "platform": "AtCoder",
-      "name": "AAL Contest 001: Let's use segtree!",
-      "start": 1791777600,
-      "duration": 18000,
-      "url": "https://atcoder.jp/contests/aalc001",
-      "register": null,
-      "tier": "lanjut"
-    },
     {
       "platform": "Codeforces",
       "name": "Educational Codeforces Round 195 (Rated for Div. 2)",
@@ -54,6 +45,15 @@
       "duration": 9000,
       "url": "https://atcoder.jp/contests/arc233",
       "register": null,
+      "tier": "tantangan"
+    },
+    {
+      "platform": "Codeforces",
+      "name": "Codeforces Round (Div. 2)",
+      "start": 1793025300,
+      "duration": 8100,
+      "url": "https://codeforces.com/contests",
+      "register": "https://codeforces.com/contestRegistration/2272",
       "tier": "tantangan"
     },
     {
