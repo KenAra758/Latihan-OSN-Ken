@@ -297,3 +297,8 @@ a.chip { text-decoration: none; color: inherit; }
   .week-meta { max-width: none; }
 }
 @media (prefers-reduced-motion: reduce) { .meter span { transition: none; } }
+
+/* Pembahasan terkunci */
+.locked { display: flex; gap: 14px; align-items: flex-start; padding: 14px 16px; border-radius: 8px; background: var(--bg); border: 1px dashed var(--line); }
+.locked p { margin: 4px 0 0; font-size: 14px; }
+.lock-icon { font-size: 22px; line-height: 1; }

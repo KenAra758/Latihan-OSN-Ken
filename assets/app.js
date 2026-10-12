@@ -250,6 +250,17 @@
   async function renderDiscussion(w) {
     $('discussion').hidden = false;
     const el = $('notes');
+    // Pembahasan terkunci sampai minggu berakhir, agar Ken mencoba sendiri dulu.
+    if (Date.now() / 1000 < w.deadline) {
+      el.innerHTML = `<div class="locked">
+        <span class="lock-icon" aria-hidden="true">🔒</span>
+        <div>
+          <strong>Pembahasan dibuka ${fmtDate(w.deadline, { weekday: 'long', day: 'numeric', month: 'long' })} pukul 00.00 WIB</strong>
+          <p class="muted">Kerjakan dulu soal-soalnya sendiri. Catatan pembahasan dan link editorial akan muncul di sini setelah minggu ini berakhir.</p>
+        </div>
+      </div>`;
+      return;
+    }
     const editorials = `<p class="muted">Editorial resmi ada di bagian "Contest materials" pada halaman kontes. Coba kerjakan dulu sebelum membukanya.</p>
       <ul class="editorials">${w.problems.map((p) => `<li><a href="${contestUrl(p)}" target="_blank" rel="noopener">${esc(p.label)} · CF ${p.contestId}</a></li>`).join('')}</ul>`;
     el.innerHTML = editorials;
@@ -263,7 +274,7 @@
       el.innerHTML = `<div>${html}</div><hr style="border:0;border-top:1px solid var(--line);margin:16px 0">${editorials}`;
     } catch (_) {
       if (state.weeks[state.viewIndex] !== w) return;
-      el.insertAdjacentHTML('afterbegin', `<p class="muted">Catatan pembahasan minggu ini belum ditulis. Tambahkan file <code>${file}</code> di repository.</p>`);
+      el.insertAdjacentHTML('afterbegin', `<p class="muted">Catatan pembahasan minggu ini belum ditulis. Tambahkan file <code>${file}</code> di repository (contoh format: <code>data/notes/CONTOH.md</code>).</p>`);
     }
   }
 

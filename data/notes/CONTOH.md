@@ -1,6 +1,6 @@
-## Catatan pembahasan Minggu 1
+## Catatan pembahasan Minggu N
 
-Tulis pembahasan di file ini setelah sesi diskusi akhir minggu. Contoh format:
+Salin file ini menjadi `minggu-01.md`, `minggu-02.md`, dst. sesuai nomor minggu. Contoh format:
 
 ### A. (nama soal)
 - **Ide utama:** ...
