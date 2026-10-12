@@ -2,7 +2,321 @@
   "tlx": {
     "username": "MarioKen",
     "totalSubmissions": 411,
-    "problems": {}
+    "problems": {},
+    "courses": [
+      {
+        "slug": "basic-cpp",
+        "name": "Pemrograman Dasar dengan C++",
+        "chapters": [
+          {
+            "alias": "01",
+            "name": "Keluaran dan Ekspresi Sederhana",
+            "total": 5,
+            "solved": 5,
+            "attempted": 5,
+            "submissions": 15,
+            "firstAt": 1762265308,
+            "lastAt": 1762436333,
+            "doneAt": 1762265804,
+            "activeDays": 1
+          },
+          {
+            "alias": "02",
+            "name": "Variabel dan Tipe Data",
+            "total": 4,
+            "solved": 4,
+            "attempted": 4,
+            "submissions": 11,
+            "firstAt": 1762436460,
+            "lastAt": 1762437211,
+            "doneAt": 1762437211,
+            "activeDays": 1
+          },
+          {
+            "alias": "03",
+            "name": "Perulangan",
+            "total": 6,
+            "solved": 6,
+            "attempted": 6,
+            "submissions": 23,
+            "firstAt": 1762596386,
+            "lastAt": 1762597392,
+            "doneAt": 1762597392,
+            "activeDays": 1
+          },
+          {
+            "alias": "04",
+            "name": "Percabangan",
+            "total": 4,
+            "solved": 4,
+            "attempted": 4,
+            "submissions": 7,
+            "firstAt": 1762597598,
+            "lastAt": 1762598170,
+            "doneAt": 1762598170,
+            "activeDays": 1
+          },
+          {
+            "alias": "05",
+            "name": "Perulangan & Percabangan",
+            "total": 6,
+            "solved": 6,
+            "attempted": 6,
+            "submissions": 47,
+            "firstAt": 1762598953,
+            "lastAt": 1762678755,
+            "doneAt": 1762678755,
+            "activeDays": 2
+          },
+          {
+            "alias": "06",
+            "name": "Larik (Array)",
+            "total": 7,
+            "solved": 7,
+            "attempted": 7,
+            "submissions": 48,
+            "firstAt": 1762679342,
+            "lastAt": 1763281648,
+            "doneAt": 1762682430,
+            "activeDays": 1
+          },
+          {
+            "alias": "07",
+            "name": "Fungsi",
+            "total": 7,
+            "solved": 7,
+            "attempted": 7,
+            "submissions": 57,
+            "firstAt": 1762682782,
+            "lastAt": 1766309059,
+            "doneAt": 1766309059,
+            "activeDays": 8
+          },
+          {
+            "alias": "08",
+            "name": "Tipe Data Lainnya",
+            "total": 6,
+            "solved": 6,
+            "attempted": 6,
+            "submissions": 45,
+            "firstAt": 1763903914,
+            "lastAt": 1769332747,
+            "doneAt": 1769332747,
+            "activeDays": 4
+          },
+          {
+            "alias": "09",
+            "name": "Rekursi",
+            "total": 6,
+            "solved": 6,
+            "attempted": 6,
+            "submissions": 25,
+            "firstAt": 1765198656,
+            "lastAt": 1785661791,
+            "doneAt": 1769935425,
+            "activeDays": 3
+          },
+          {
+            "alias": "10",
+            "name": "Menggunakan Kompilator",
+            "total": 0,
+            "solved": 0,
+            "attempted": 0,
+            "submissions": 0,
+            "firstAt": null,
+            "lastAt": null,
+            "doneAt": null,
+            "activeDays": 0
+          },
+          {
+            "alias": "11",
+            "name": "Analisis Kompleksitas",
+            "total": 5,
+            "solved": 5,
+            "attempted": 5,
+            "submissions": 27,
+            "firstAt": 1765785833,
+            "lastAt": 1766309105,
+            "doneAt": 1766309105,
+            "activeDays": 2
+          },
+          {
+            "alias": "12",
+            "name": "Latihan Pemantapan Materi",
+            "total": 8,
+            "solved": 6,
+            "attempted": 6,
+            "submissions": 29,
+            "firstAt": 1766309908,
+            "lastAt": 1772359760,
+            "doneAt": null,
+            "activeDays": 3
+          }
+        ]
+      },
+      {
+        "slug": "competitive-1",
+        "name": "Pemrograman Kompetitif Dasar",
+        "chapters": [
+          {
+            "alias": "01",
+            "name": "Perkenalan Pemrograman Kompetitif",
+            "total": 5,
+            "solved": 0,
+            "attempted": 0,
+            "submissions": 0,
+            "firstAt": null,
+            "lastAt": null,
+            "doneAt": null,
+            "activeDays": 0
+          },
+          {
+            "alias": "02",
+            "name": "Matematika Diskret Dasar",
+            "total": 10,
+            "solved": 3,
+            "attempted": 4,
+            "submissions": 10,
+            "firstAt": 1773562878,
+            "lastAt": 1774774517,
+            "doneAt": null,
+            "activeDays": 2
+          },
+          {
+            "alias": "03",
+            "name": "Pencarian dan Pengurutan",
+            "total": 7,
+            "solved": 6,
+            "attempted": 6,
+            "submissions": 32,
+            "firstAt": 1780823206,
+            "lastAt": 1783241978,
+            "doneAt": null,
+            "activeDays": 5
+          },
+          {
+            "alias": "04",
+            "name": "Brute Force",
+            "total": 9,
+            "solved": 3,
+            "attempted": 3,
+            "submissions": 7,
+            "firstAt": 1782634807,
+            "lastAt": 1784450000,
+            "doneAt": null,
+            "activeDays": 2
+          },
+          {
+            "alias": "05",
+            "name": "Divide and Conquer",
+            "total": 3,
+            "solved": 1,
+            "attempted": 1,
+            "submissions": 1,
+            "firstAt": 1785663771,
+            "lastAt": 1785663771,
+            "doneAt": null,
+            "activeDays": 1
+          },
+          {
+            "alias": "06",
+            "name": "Greedy",
+            "total": 9,
+            "solved": 4,
+            "attempted": 4,
+            "submissions": 9,
+            "firstAt": 1786262814,
+            "lastAt": 1786869260,
+            "doneAt": null,
+            "activeDays": 2
+          },
+          {
+            "alias": "07",
+            "name": "Dynamic Programming",
+            "total": 10,
+            "solved": 0,
+            "attempted": 0,
+            "submissions": 0,
+            "firstAt": null,
+            "lastAt": null,
+            "doneAt": null,
+            "activeDays": 0
+          },
+          {
+            "alias": "08",
+            "name": "Struktur Data Dasar",
+            "total": 5,
+            "solved": 2,
+            "attempted": 3,
+            "submissions": 12,
+            "firstAt": 1789289300,
+            "lastAt": 1790253978,
+            "doneAt": null,
+            "activeDays": 3
+          },
+          {
+            "alias": "09",
+            "name": "Perkenalan Graf",
+            "total": 7,
+            "solved": 0,
+            "attempted": 0,
+            "submissions": 0,
+            "firstAt": null,
+            "lastAt": null,
+            "doneAt": null,
+            "activeDays": 0
+          },
+          {
+            "alias": "10",
+            "name": "Struktur Data Non-Linear",
+            "total": 4,
+            "solved": 0,
+            "attempted": 0,
+            "submissions": 0,
+            "firstAt": null,
+            "lastAt": null,
+            "doneAt": null,
+            "activeDays": 0
+          },
+          {
+            "alias": "11",
+            "name": "Algoritma Graf",
+            "total": 6,
+            "solved": 0,
+            "attempted": 0,
+            "submissions": 0,
+            "firstAt": null,
+            "lastAt": null,
+            "doneAt": null,
+            "activeDays": 0
+          },
+          {
+            "alias": "12",
+            "name": "Dasar-Dasar Geometri",
+            "total": 4,
+            "solved": 0,
+            "attempted": 0,
+            "submissions": 0,
+            "firstAt": null,
+            "lastAt": null,
+            "doneAt": null,
+            "activeDays": 0
+          },
+          {
+            "alias": "13",
+            "name": "Persiapan Kompetisi",
+            "total": 9,
+            "solved": 0,
+            "attempted": 0,
+            "submissions": 0,
+            "firstAt": null,
+            "lastAt": null,
+            "doneAt": null,
+            "activeDays": 0
+          }
+        ]
+      }
+    ]
   },
   "atcoder": {
     "handle": "MarioKen",
@@ -11,5 +325,5 @@
     "contests": 2,
     "acCount": 89
   },
-  "updatedAt": "2026-10-12T02:28:04.129Z"
+  "updatedAt": "2026-10-12T06:47:42.817Z"
 }

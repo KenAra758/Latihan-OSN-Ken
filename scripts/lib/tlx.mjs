@@ -77,3 +77,20 @@ export async function tlxPool(archiveSlugs) {
   pool.sort((a, b) => a._rank[0] - b._rank[0] || a._rank[1] - b._rank[1] || a._rank[2] - b._rank[2]);
   return pool.map(({ _rank, ...p }) => p);
 }
+
+// Struktur kursus TLX: daftar bab beserta soal pemrogramannya.
+export async function tlxCourse(slug) {
+  const course = await get(`/courses/slug/${encodeURIComponent(slug)}`);
+  const body = await get(`/courses/${course.jid}/chapters`);
+  const chapters = [];
+  for (const ch of body.data) {
+    const problems = (await get(`/chapters/${ch.chapterJid}/problems`)).data.filter((p) => p.type === 'PROGRAMMING');
+    chapters.push({
+      alias: ch.alias,
+      jid: ch.chapterJid,
+      name: body.chaptersMap?.[ch.chapterJid]?.name || ch.name || `Bab ${ch.alias}`,
+      problemJids: problems.map((p) => p.problemJid),
+    });
+  }
+  return { slug, name: course.name, chapters };
+}

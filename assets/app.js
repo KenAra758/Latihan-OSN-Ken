@@ -466,11 +466,127 @@
     $('next-contest-list').innerHTML = next.map((c) => contestItem(c, now)).join('');
   }
 
+  // ---------- Render: topik ----------
+  const TAG_ID = {
+    'implementation': 'Implementasi', 'math': 'Matematika', 'greedy': 'Greedy', 'brute force': 'Brute force',
+    'constructive algorithms': 'Konstruktif', 'sortings': 'Pengurutan', 'strings': 'String', 'number theory': 'Teori bilangan',
+    'dp': 'Dynamic programming', 'binary search': 'Binary search', 'two pointers': 'Two pointers', 'graphs': 'Graf',
+    'dfs and similar': 'DFS/BFS', 'trees': 'Pohon (tree)', 'data structures': 'Struktur data', 'bitmasks': 'Bitmask',
+    'combinatorics': 'Kombinatorika', 'geometry': 'Geometri', 'games': 'Permainan', 'dsu': 'DSU', 'shortest paths': 'Jalur terpendek',
+    'hashing': 'Hashing', 'probabilities': 'Peluang', 'divide and conquer': 'Divide & conquer', 'interactive': 'Interaktif',
+    'matrices': 'Matriks', 'graph matchings': 'Matching graf', 'string suffix structures': 'Struktur suffix', 'flows': 'Flow',
+  };
+
+  const shortDate = (sec) => fmtDate(sec, { day: 'numeric', month: 'short', year: '2-digit' });
+
+  function dayDots(n) {
+    if (!n) return '<span class="muted">–</span>';
+    const dots = '<i></i>'.repeat(Math.min(n, 10));
+    return `<span class="days"><span class="dots" aria-hidden="true">${dots}</span><span class="mono">${n}</span></span>`;
+  }
+
+  function renderCourses() {
+    const el = $('courses');
+    const courses = state.progress?.tlx?.courses;
+    if (!courses?.length) {
+      el.innerHTML = '<p class="muted">Data kursus TLX belum tersedia. Data diperbarui otomatis setiap 2 jam.</p>';
+      return;
+    }
+    el.innerHTML = courses.map((c) => {
+      const chapters = c.chapters.filter((ch) => ch.total > 0);
+      const doneDays = chapters.filter((ch) => ch.doneAt).map((ch) => ch.activeDays).sort((a, b) => a - b);
+      const median = doneDays.length ? doneDays[Math.floor(doneDays.length / 2)] : 0;
+      const heavyAt = Math.max(4, median * 2);
+      const solved = chapters.reduce((n, ch) => n + ch.solved, 0);
+      const total = chapters.reduce((n, ch) => n + ch.total, 0);
+      const doneCount = chapters.filter((ch) => ch.doneAt).length;
+      const rows = chapters.map((ch) => {
+        let status;
+        if (ch.doneAt) status = `<span class="badge done">Tuntas</span>`;
+        else if (ch.attempted) status = `<span class="badge open">Belum tuntas</span>`;
+        else status = `<span class="badge idle">Belum mulai</span>`;
+        if (ch.activeDays >= heavyAt) status += ` <span class="badge heavy" title="Butuh jauh lebih banyak hari daripada bab lain">Butuh waktu lama</span>`;
+        const when = ch.firstAt ? `${shortDate(ch.firstAt)} → ${ch.doneAt ? shortDate(ch.doneAt) : 'sekarang'}` : '';
+        const pct = ch.total ? (ch.solved / ch.total) * 100 : 0;
+        return `<tr class="${ch.attempted ? '' : 'untouched'}">
+          <td class="alias">${esc(ch.alias)}</td>
+          <td class="tname">${esc(ch.name)}</td>
+          <td><div class="solvebar"><span class="track"><span class="${ch.doneAt ? 'done' : ''}" style="width:${pct}%"></span></span><span class="val">${ch.solved}/${ch.total}</span></div></td>
+          <td>${dayDots(ch.activeDays)}</td>
+          <td class="when">${when}</td>
+          <td>${status}</td>
+        </tr>`;
+      }).join('');
+      return `<section class="topic-block">
+        <div class="topic-head">
+          <h2><a href="https://tlx.toki.id/courses/${esc(c.slug)}" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">${esc(c.name)}</a></h2>
+          <div class="course-meter"><span class="track"><span class="${doneCount === chapters.length ? 'done' : ''}" style="width:${total ? (solved / total) * 100 : 0}%"></span></span>
+            ${solved}/${total} soal · ${doneCount}/${chapters.length} bab tuntas</div>
+        </div>
+        <div class="table-scroll">
+          <table class="topics">
+            <thead><tr><th>Bab</th><th>Topik</th><th>Soal selesai</th><th>Hari aktif</th><th>Mulai → selesai</th><th>Status</th></tr></thead>
+            <tbody>${rows}</tbody>
+          </table>
+        </div>
+      </section>`;
+    }).join('');
+  }
+
+  function renderCfTopics() {
+    const body = $('cf-topics');
+    if (!state.subs.length) {
+      body.innerHTML = '<tr><td colspan="4" class="empty">Belum ada data submission Codeforces.</td></tr>';
+      return;
+    }
+    // Ringkas per soal: sudah AC atau belum, dan berapa kali submit sampai AC.
+    const perProblem = new Map();
+    for (const s of [...state.subs].sort((a, b) => a.creationTimeSeconds - b.creationTimeSeconds)) {
+      if (!s.problem?.contestId) continue;
+      const k = keyOf(s.problem);
+      const e = perProblem.get(k) || { tags: s.problem.tags || [], tries: 0, solved: false, triesToAc: 0 };
+      if (!e.solved) {
+        e.tries++;
+        if (s.verdict === 'OK') { e.solved = true; e.triesToAc = e.tries; }
+      }
+      perProblem.set(k, e);
+    }
+    const perTag = new Map();
+    for (const e of perProblem.values()) {
+      for (const t of e.tags) {
+        const x = perTag.get(t) || { attempted: 0, solved: 0, tries: 0 };
+        x.attempted++;
+        if (e.solved) { x.solved++; x.tries += e.triesToAc; }
+        perTag.set(t, x);
+      }
+    }
+    const rows = [...perTag.entries()].sort((a, b) => b[1].attempted - a[1].attempted || b[1].solved - a[1].solved);
+    body.innerHTML = rows.map(([tag, x]) => {
+      const rate = x.solved / x.attempted;
+      const avg = x.solved ? `${(x.tries / x.solved).toFixed(1)}×` : '–';
+      let badge = '';
+      if (x.attempted >= 3 && rate < 0.6) badge = '<span class="badge weak">Perlu latihan</span>';
+      else if (x.solved >= 5 && rate >= 0.85 && x.tries / x.solved <= 2) badge = '<span class="badge done">Kuat</span>';
+      return `<tr>
+        <td class="tname">${esc(TAG_ID[tag] || tag)}</td>
+        <td><div class="solvebar"><span class="track"><span class="${rate < 0.6 ? 'weak' : 'done'}" style="width:${rate * 100}%"></span></span><span class="val">${x.solved}/${x.attempted}</span></div></td>
+        <td class="num">${avg}</td>
+        <td>${badge}</td>
+      </tr>`;
+    }).join('');
+  }
+
+  function renderTopics() {
+    renderCourses();
+    renderCfTopics();
+  }
+
   function renderAll() {
     renderProfile();
     renderWeek();
     renderHistory();
     renderStats();
+    renderTopics();
     renderContests();
   }
 
@@ -498,7 +614,7 @@
     state.tab = name;
     renderContests();
     document.querySelectorAll('.tabs button').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.tab === name)));
-    ['minggu', 'riwayat', 'statistik', 'kontes'].forEach((t) => { $(`panel-${t}`).hidden = t !== name; });
+    ['minggu', 'riwayat', 'statistik', 'topik', 'kontes'].forEach((t) => { $(`panel-${t}`).hidden = t !== name; });
   }
 
   async function init() {

@@ -8,6 +8,7 @@ Website latihan Codeforces untuk persiapan OSN Informatika. Formatnya mirip prog
 - **Bonus 2 soal OSN asli** setiap minggu dari arsip **TLX TOKI** (mulai dari OSN-P, soal termudah dulu, lalu OSN nasional). Soal yang sudah Ken selesaikan dengan skor 100 dilewati. Status dan skor subtask dibaca otomatis setiap 2 jam.
 - **Naik level otomatis:** jika Ken menyelesaikan ≥ 7 dari 8 soal selama 2 minggu berturut-turut, level berikutnya naik 100 (misalnya 800–1400 menjadi 900–1500).
 - Tab **Riwayat** dan **Statistik** menyimpan progres semua minggu.
+- Tab **Topik** menunjukkan progres per bab kursus TLX (Pemrograman Dasar C++ dan Pemrograman Kompetitif Dasar), termasuk berapa **hari aktif** yang dibutuhkan untuk tiap bab, serta tingkat keberhasilan Ken per topik soal Codeforces. Kursus yang dipantau diatur di `tlxCourses` pada `config.json`.
 - Tab **Kontes** menampilkan jadwal kontes terdekat dari **Codeforces, AtCoder, dan TLX TOKI** (diperbarui otomatis setiap hari pukul 05:30 WIB), lengkap dengan tombol **Daftar** dan **+ Kalender** (Google Calendar) supaya tidak lupa. Tiga kontes "Cocok" terdekat juga tampil di halaman Minggu ini.
 - **Pembahasan:** tulis catatan di `data/notes/minggu-01.md`, `minggu-02.md`, dan seterusnya.
 

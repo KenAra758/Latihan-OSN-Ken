@@ -34,6 +34,7 @@
       <button role="tab" id="tab-minggu" aria-selected="true" data-tab="minggu">Minggu ini</button>
       <button role="tab" id="tab-riwayat" aria-selected="false" data-tab="riwayat">Riwayat</button>
       <button role="tab" id="tab-statistik" aria-selected="false" data-tab="statistik">Statistik</button>
+      <button role="tab" id="tab-topik" aria-selected="false" data-tab="topik">Topik</button>
       <button role="tab" id="tab-kontes" aria-selected="false" data-tab="kontes">Kontes</button>
     </nav>
 
@@ -117,6 +118,25 @@
           <ul class="tag-bars" id="rating-bars"></ul>
         </figure>
       </div>
+    </section>
+
+    <!-- TOPIK -->
+    <section class="panel" id="panel-topik" role="tabpanel" aria-labelledby="tab-topik" hidden>
+      <p class="topic-intro muted">Waktu diukur dalam <strong>hari aktif</strong>, yaitu jumlah hari Ken mengirim jawaban untuk topik itu. Ini lebih jujur daripada rentang kalender, karena Ken bisa saja kembali ke sebuah topik berbulan-bulan kemudian.</p>
+      <div id="courses"></div>
+
+      <section class="topic-block">
+        <div class="topic-head">
+          <h2>Topik soal Codeforces</h2>
+          <p class="muted small">Dari semua soal Codeforces yang pernah Ken coba. Satu soal bisa punya beberapa topik.</p>
+        </div>
+        <div class="table-scroll">
+          <table class="topics">
+            <thead><tr><th>Topik</th><th>Berhasil diselesaikan</th><th class="num">Rata-rata submit</th><th></th></tr></thead>
+            <tbody id="cf-topics"></tbody>
+          </table>
+        </div>
+      </section>
     </section>
 
     <!-- KONTES -->

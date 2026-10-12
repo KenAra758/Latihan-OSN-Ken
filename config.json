@@ -2,6 +2,10 @@
   "handle": "MarioKen",
   "atcoderHandle": "MarioKen",
   "tlxUsername": "MarioKen",
+  "tlxCourses": [
+    "basic-cpp",
+    "competitive-1"
+  ],
   "displayName": "Ken",
   "timezoneOffsetHours": 7,
   "problemsPerWeek": 8,
