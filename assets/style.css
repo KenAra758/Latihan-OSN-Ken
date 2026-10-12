@@ -335,3 +335,14 @@ a.chip { text-decoration: none; color: inherit; }
 .badge.heavy { background: var(--accent-soft); color: var(--accent); }
 .badge.weak { background: var(--late-soft); color: var(--late); }
 .badge.idle { background: var(--bg); color: var(--muted); border: 1px solid var(--line); }
+
+/* Soal dalam proses / sedang dikerjakan */
+.status.proses { background: var(--accent-soft); color: var(--accent); }
+.status.active { background: var(--accent); color: var(--surface); }
+.problem.inprogress { box-shadow: inset 3px 0 0 var(--accent-soft); }
+.problem.working { background: linear-gradient(90deg, var(--accent-soft), transparent 70%); box-shadow: inset 3px 0 0 var(--accent); }
+.problem.working .p-label { border-color: var(--accent); color: var(--accent); }
+.working-line { margin: 0; font-size: 14px; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; color: var(--accent); }
+.dot-live { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); display: inline-block; animation: blink 1.6s ease-in-out infinite; }
+@keyframes blink { 50% { opacity: .3; } }
+@media (prefers-reduced-motion: reduce) { .dot-live { animation: none; } }

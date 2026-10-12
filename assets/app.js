@@ -55,6 +55,16 @@
     return body.result;
   }
 
+  // Soal dianggap "sedang dikerjakan" jika submit terakhirnya belum lama.
+  const ACTIVE_SEC = 3 * 3600;
+
+  function agoText(sec) {
+    const d = Date.now() / 1000 - sec;
+    if (d < 3600) return `${Math.max(1, Math.round(d / 60))} menit lalu`;
+    if (d < 86400) return `${Math.floor(d / 3600)} jam lalu`;
+    return fmtDate(sec, { day: 'numeric', month: 'short' });
+  }
+
   // ---------- Status soal dari submission Codeforces ----------
   function statusOf(problem, week) {
     const name = problem.name.trim().toLowerCase();
@@ -64,10 +74,21 @@
     );
     if (!mine.length) return { kind: 'todo', attempts: 0 };
     const ok = mine.filter((s) => s.verdict === 'OK').sort((a, b) => a.creationTimeSeconds - b.creationTimeSeconds)[0];
-    if (!ok) return { kind: 'tried', attempts: mine.length };
+    if (!ok) {
+      const lastAt = Math.max(...mine.map((s) => s.creationTimeSeconds));
+      return { kind: 'tried', attempts: mine.length, lastAt, active: Date.now() / 1000 - lastAt < ACTIVE_SEC };
+    }
     const attempts = mine.filter((s) => s.creationTimeSeconds <= ok.creationTimeSeconds).length;
     const onTime = ok.creationTimeSeconds < week.deadline;
     return { kind: onTime ? 'ok' : 'late', attempts, at: ok.creationTimeSeconds };
+  }
+
+  // Label untuk soal yang sudah dicoba tapi belum selesai.
+  function progressStatus(s, extra) {
+    const label = s.active ? 'Sedang dikerjakan' : 'Proses';
+    const cls = s.active ? 'active' : 'proses';
+    const last = s.lastAt ? ` · terakhir ${agoText(s.lastAt)}` : '';
+    return `<span class="status ${cls}">${label}${extra ? ` · ${extra}` : ''}</span><small>${s.attempts}× submit${last}</small>`;
   }
 
   function weekScore(week) {
@@ -84,8 +105,9 @@
     const e = state.progress?.tlx?.problems?.[b.problemJid];
     if (!e || !e.attempts) return { kind: 'todo', attempts: 0 };
     if (e.solvedAt) return { kind: e.solvedAt < week.deadline ? 'ok' : 'late', attempts: e.attempts, at: e.solvedAt, best: 100 };
-    if (e.best > 0) return { kind: 'partial', attempts: e.attempts, best: e.best };
-    return { kind: 'tried', attempts: e.attempts, best: 0 };
+    const active = !!e.lastAt && Date.now() / 1000 - e.lastAt < ACTIVE_SEC;
+    if (e.best > 0) return { kind: 'partial', attempts: e.attempts, best: e.best, lastAt: e.lastAt, active };
+    return { kind: 'tried', attempts: e.attempts, best: 0, lastAt: e.lastAt, active };
   }
 
   function bonusScore(week) {
@@ -171,11 +193,11 @@
       let status;
       if (s.kind === 'ok') status = `<span class="status ok">Selesai</span><small>${fmtDate(s.at, { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })} · ${s.attempts}× submit</small>`;
       else if (s.kind === 'late') status = `<span class="status late">Susulan</span><small>${fmtDate(s.at, { day: 'numeric', month: 'short' })} · ${s.attempts}× submit</small>`;
-      else if (s.kind === 'tried') status = `<span class="status tried">Dicoba</span><small>${s.attempts}× submit, belum AC</small>`;
+      else if (s.kind === 'tried') status = progressStatus(s, 'belum AC');
       else status = `<span class="status todo">Belum</span>`;
       const tags = showTags && p.tags.length
         ? `<span class="tags">${p.tags.map((t) => `<span class="tag">${esc(t)}</span>`).join('')}</span>` : '';
-      const rowClass = s.kind === 'ok' ? 'solved' : s.kind === 'late' ? 'late' : '';
+      const rowClass = s.kind === 'ok' ? 'solved' : s.kind === 'late' ? 'late' : s.active ? 'working' : s.attempts ? 'inprogress' : '';
       return `<li class="problem ${rowClass}">
         <span class="p-label">${esc(p.label)}</span>
         <div class="p-main">
@@ -191,6 +213,7 @@
     }).join('');
 
     renderBonus(w);
+    renderWorking(w);
     renderLevelUp(isCurrent);
     renderDiscussion(w);
   }
@@ -212,10 +235,10 @@
       let status;
       if (s.kind === 'ok') status = `<span class="status ok">Selesai</span><small>${fmtDate(s.at, { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })} · ${s.attempts}× submit</small>`;
       else if (s.kind === 'late') status = `<span class="status late">Susulan</span><small>${fmtDate(s.at, { day: 'numeric', month: 'short' })} · ${s.attempts}× submit</small>`;
-      else if (s.kind === 'partial') status = `<span class="status partial">Skor ${s.best}</span><small>${s.attempts}× submit, kejar 100</small>`;
-      else if (s.kind === 'tried') status = `<span class="status tried">Dicoba</span><small>${s.attempts}× submit, skor 0</small>`;
+      else if (s.kind === 'partial') status = progressStatus(s, `skor ${s.best}`);
+      else if (s.kind === 'tried') status = progressStatus(s, 'skor 0');
       else status = `<span class="status todo">Belum</span>`;
-      const rowClass = s.kind === 'ok' ? 'solved' : s.kind === 'late' ? 'late' : '';
+      const rowClass = s.kind === 'ok' ? 'solved' : s.kind === 'late' ? 'late' : s.active ? 'working' : s.attempts ? 'inprogress' : '';
       return `<li class="problem ${rowClass}">
         <span class="p-label">B${i + 1}</span>
         <div class="p-main">
@@ -225,6 +248,22 @@
         <div class="p-status">${status}</div>
       </li>`;
     }).join('');
+  }
+
+  // Ringkasan di kepala minggu: soal mana yang sedang/masih dikerjakan.
+  function renderWorking(w) {
+    const el = $('working');
+    const items = [
+      ...w.problems.map((p) => ({ label: p.label, s: statusOf(p, w) })),
+      ...(w.bonus || []).map((b, i) => ({ label: `B${i + 1}`, s: bonusStatusOf(b, w) })),
+    ];
+    const active = items.filter((x) => x.s.active).map((x) => x.label);
+    const proses = items.filter((x) => !x.s.active && (x.s.kind === 'tried' || x.s.kind === 'partial')).map((x) => x.label);
+    const parts = [];
+    if (active.length) parts.push(`<span class="dot-live" aria-hidden="true"></span><strong>Sedang dikerjakan: ${active.join(', ')}</strong>`);
+    if (proses.length) parts.push(`<span>Proses: ${proses.join(', ')}</span>`);
+    el.hidden = !parts.length;
+    el.innerHTML = parts.join('<span class="muted"> · </span>');
   }
 
   function renderLevelUp(isCurrent) {
