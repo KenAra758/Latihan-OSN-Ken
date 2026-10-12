@@ -1,0 +1,32 @@
+{
+  "handle": "MarioKen",
+  "atcoderHandle": "MarioKen",
+  "tlxUsername": "MarioKen",
+  "displayName": "Ken",
+  "timezoneOffsetHours": 7,
+  "problemsPerWeek": 8,
+  "level": {
+    "min": 800,
+    "max": 1400
+  },
+  "autoPromote": {
+    "enabled": true,
+    "minSolved": 7,
+    "consecutiveWeeks": 2,
+    "step": 100,
+    "maxRatingCap": 2400
+  },
+  "minContestId": 1000,
+  "excludeTags": [
+    "*special",
+    "interactive"
+  ],
+  "tlxBonus": {
+    "enabled": true,
+    "perWeek": 2,
+    "archives": [
+      "osp",
+      "osn"
+    ]
+  }
+}

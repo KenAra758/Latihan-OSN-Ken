@@ -1,0 +1,124 @@
+[
+  {
+    "week": 1,
+    "start": "2026-10-12",
+    "end": "2026-10-18",
+    "deadline": 1792342800,
+    "level": {
+      "min": 800,
+      "max": 1400
+    },
+    "generatedAt": "2026-10-11T15:53:23.146Z",
+    "problems": [
+      {
+        "label": "A",
+        "contestId": 1515,
+        "index": "A",
+        "name": "Phoenix and Gold",
+        "rating": 800,
+        "tags": [
+          "constructive algorithms",
+          "greedy",
+          "math"
+        ]
+      },
+      {
+        "label": "B",
+        "contestId": 1025,
+        "index": "A",
+        "name": "Doggo Recoloring",
+        "rating": 900,
+        "tags": [
+          "implementation",
+          "sortings"
+        ]
+      },
+      {
+        "label": "C",
+        "contestId": 2237,
+        "index": "B",
+        "name": "Annoying the Ghost",
+        "rating": 1000,
+        "tags": [
+          "brute force",
+          "greedy"
+        ]
+      },
+      {
+        "label": "D",
+        "contestId": 1523,
+        "index": "B",
+        "name": "Lord of the Values",
+        "rating": 1100,
+        "tags": [
+          "constructive algorithms"
+        ]
+      },
+      {
+        "label": "E",
+        "contestId": 1463,
+        "index": "A",
+        "name": "Dungeon",
+        "rating": 1100,
+        "tags": [
+          "binary search",
+          "math"
+        ]
+      },
+      {
+        "label": "F",
+        "contestId": 2172,
+        "index": "E",
+        "name": "Number Maze",
+        "rating": 1200,
+        "tags": [
+          "implementation"
+        ]
+      },
+      {
+        "label": "G",
+        "contestId": 1676,
+        "index": "G",
+        "name": "White-Black Balanced Subtrees",
+        "rating": 1300,
+        "tags": [
+          "dfs and similar",
+          "dp",
+          "graphs",
+          "trees"
+        ]
+      },
+      {
+        "label": "H",
+        "contestId": 2172,
+        "index": "M",
+        "name": "Maximum Distance To Port",
+        "rating": 1400,
+        "tags": [
+          "graphs",
+          "shortest paths"
+        ]
+      }
+    ],
+    "bonus": [
+      {
+        "label": "Bonus 1",
+        "problemJid": "JIDPROGajDUmMsqhKsGDAVvdRdg",
+        "set": "OSN-P Informatika 2026",
+        "setSlug": "osnp-2026",
+        "alias": "A",
+        "name": "Kotak Telur",
+        "url": "https://tlx.toki.id/problems/osnp-2026/A"
+      },
+      {
+        "label": "Bonus 2",
+        "problemJid": "JIDPROG3kmEh83Sqo6Xwd1NVIdZ",
+        "set": "OSN-P Informatika 2025",
+        "setSlug": "osnp-2025",
+        "alias": "A",
+        "name": "String Cantik OSN-P",
+        "url": "https://tlx.toki.id/problems/osnp-2025/A"
+      }
+    ]
+  }
+]

@@ -1,0 +1,78 @@
+{
+  "updatedAt": "2026-10-12T02:09:53.089Z",
+  "failed": [],
+  "contests": [
+    {
+      "platform": "AtCoder",
+      "name": "AAL Contest 001: Let's use segtree!",
+      "start": 1791777600,
+      "duration": 18000,
+      "url": "https://atcoder.jp/contests/aalc001",
+      "register": null,
+      "tier": "lanjut"
+    },
+    {
+      "platform": "Codeforces",
+      "name": "Educational Codeforces Round 195 (Rated for Div. 2)",
+      "start": 1791988500,
+      "duration": 7200,
+      "url": "https://codeforces.com/contests",
+      "register": "https://codeforces.com/contestRegistration/2276",
+      "tier": "cocok"
+    },
+    {
+      "platform": "AtCoder",
+      "name": "AtCoder Heuristic Contest 073",
+      "start": 1792216800,
+      "duration": 14400,
+      "url": "https://atcoder.jp/contests/ahc073",
+      "register": null,
+      "tier": "lanjut"
+    },
+    {
+      "platform": "AtCoder",
+      "name": "AtCoder Beginner Contest 480",
+      "start": 1792238400,
+      "duration": 6000,
+      "url": "https://atcoder.jp/contests/abc480",
+      "register": null,
+      "tier": "cocok"
+    },
+    {
+      "platform": "Codeforces",
+      "name": "WorldQuant Round 1 (Codeforces Round Div. 1 + Div. 2)",
+      "start": 1792247700,
+      "duration": 10800,
+      "url": "https://codeforces.com/contests",
+      "register": "https://codeforces.com/contestRegistration/2261",
+      "tier": "tantangan"
+    },
+    {
+      "platform": "AtCoder",
+      "name": "AtCoder Regular Contest++ 233",
+      "start": 1792929600,
+      "duration": 9000,
+      "url": "https://atcoder.jp/contests/arc233",
+      "register": null,
+      "tier": "tantangan"
+    },
+    {
+      "platform": "AtCoder",
+      "name": "HACK TO THE FUTURE 2027 (AtCoder Heuristic Contest 074)",
+      "start": 1793354400,
+      "duration": 864000,
+      "url": "https://atcoder.jp/contests/ahc074",
+      "register": null,
+      "tier": "lanjut"
+    },
+    {
+      "platform": "AtCoder",
+      "name": "AtCoder Grand Contest 079",
+      "start": 1794139200,
+      "duration": 10800,
+      "url": "https://atcoder.jp/contests/agc079",
+      "register": null,
+      "tier": "lanjut"
+    }
+  ]
+}

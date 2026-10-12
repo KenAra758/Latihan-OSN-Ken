@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Latihan Mingguan Ken</title>
+  <meta name="description" content="Paket 8 soal Codeforces setiap minggu, progres, dan pembahasan.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <p class="eyebrow">Latihan Codeforces · OSN Informatika</p>
+        <h1 id="title">Latihan Mingguan</h1>
+      </div>
+      <div class="profile" id="profile" aria-live="polite">
+        <span class="muted">Memuat profil…</span>
+      </div>
+    </header>
+
+    <aside class="next-contests" id="next-contests" aria-labelledby="nc-title" hidden>
+      <div class="nc-head">
+        <h2 id="nc-title"><span class="pulse" aria-hidden="true"></span>Kontes terdekat untuk Ken</h2>
+        <button class="link-btn" data-goto="kontes">Lihat semua kontes ›</button>
+      </div>
+      <ul class="contest-list" id="next-contest-list"></ul>
+    </aside>
+
+    <nav class="tabs" role="tablist" aria-label="Bagian">
+      <button role="tab" id="tab-minggu" aria-selected="true" data-tab="minggu">Minggu ini</button>
+      <button role="tab" id="tab-riwayat" aria-selected="false" data-tab="riwayat">Riwayat</button>
+      <button role="tab" id="tab-statistik" aria-selected="false" data-tab="statistik">Statistik</button>
+      <button role="tab" id="tab-kontes" aria-selected="false" data-tab="kontes">Kontes</button>
+    </nav>
+
+    <p class="banner" id="banner" hidden></p>
+
+    <!-- MINGGU -->
+    <section class="panel" id="panel-minggu" role="tabpanel" aria-labelledby="tab-minggu">
+      <div class="week-head">
+        <div class="week-nav">
+          <button class="icon-btn" id="prev-week" aria-label="Minggu sebelumnya">‹</button>
+          <div>
+            <h2 id="week-title">Minggu —</h2>
+            <p class="muted" id="week-dates"></p>
+          </div>
+          <button class="icon-btn" id="next-week" aria-label="Minggu berikutnya">›</button>
+        </div>
+        <div class="week-meta">
+          <div class="score">
+            <span class="score-num" id="week-score">0/8</span>
+            <span class="muted">selesai</span>
+          </div>
+          <div class="meter" aria-hidden="true"><span id="week-meter"></span></div>
+          <p class="bonus-score" id="bonus-score" hidden></p>
+          <p class="countdown" id="countdown"></p>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <label class="switch"><input type="checkbox" id="show-tags"> Tampilkan topik soal</label>
+        <button class="btn-ghost" id="refresh">Perbarui status</button>
+      </div>
+
+      <ol class="problems" id="problems"></ol>
+
+      <section class="bonus" id="bonus" hidden>
+        <div class="bonus-head">
+          <div>
+            <h3>Bonus soal OSN asli</h3>
+            <p class="muted small">Dari arsip TLX TOKI. Dinilai per subtask (skor 0–100), sama seperti saat OSN.</p>
+          </div>
+          <span class="muted small" id="bonus-updated"></span>
+        </div>
+        <ol class="problems" id="bonus-list"></ol>
+      </section>
+
+      <div class="levelup" id="levelup"></div>
+
+      <article class="discussion" id="discussion">
+        <h3>Pembahasan</h3>
+        <div id="notes" class="notes"></div>
+      </article>
+    </section>
+
+    <!-- RIWAYAT -->
+    <section class="panel" id="panel-riwayat" role="tabpanel" aria-labelledby="tab-riwayat" hidden>
+      <div class="table-scroll">
+        <table class="history">
+          <thead>
+            <tr><th>Minggu</th><th>Tanggal</th><th>Level</th><th class="num">Tepat waktu</th><th class="num">Total</th><th class="num">Bonus</th><th></th></tr>
+          </thead>
+          <tbody id="history-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- STATISTIK -->
+    <section class="panel" id="panel-statistik" role="tabpanel" aria-labelledby="tab-statistik" hidden>
+      <div class="stat-tiles" id="stat-tiles"></div>
+      <figure class="chart-card">
+        <figcaption>Soal selesai per minggu</figcaption>
+        <div id="chart" class="chart"></div>
+        <div class="legend"><span class="key on"></span>Tepat waktu <span class="key late"></span>Susulan</div>
+      </figure>
+      <div class="split">
+        <figure class="chart-card">
+          <figcaption>Topik yang sudah dikuasai</figcaption>
+          <ul class="tag-bars" id="tag-bars"></ul>
+        </figure>
+        <figure class="chart-card">
+          <figcaption>Selesai per rating soal</figcaption>
+          <ul class="tag-bars" id="rating-bars"></ul>
+        </figure>
+      </div>
+    </section>
+
+    <!-- KONTES -->
+    <section class="panel" id="panel-kontes" role="tabpanel" aria-labelledby="tab-kontes" hidden>
+      <div class="contest-intro">
+        <p>Ikut kontes resmi memberi Ken <strong>rating</strong> untuk mengukur kemajuan. Daftar diperbarui otomatis setiap hari. Semua waktu dalam <strong>WIB</strong>.</p>
+        <div class="filters" role="group" aria-label="Saring kontes">
+          <label class="switch"><input type="checkbox" id="f-tantangan" checked> Tantangan</label>
+          <label class="switch"><input type="checkbox" id="f-lanjut"> Level lanjut</label>
+        </div>
+      </div>
+      <dl class="tier-legend">
+        <div><dt><span class="tier cocok">Cocok</span></dt><dd>Codeforces Div. 3/4 &amp; Educational, AtCoder Beginner Contest, kontes TLX TOKI. Ikuti rutin.</dd></div>
+        <div><dt><span class="tier tantangan">Tantangan</span></dt><dd>Codeforces Div. 2, AtCoder Regular. Soal pertama biasanya masih terjangkau.</dd></div>
+        <div><dt><span class="tier lanjut">Lanjut</span></dt><dd>Div. 1, AtCoder Grand, Heuristic. Untuk nanti.</dd></div>
+      </dl>
+      <ul class="contest-list" id="contest-list"></ul>
+      <p class="muted small" id="contest-updated"></p>
+    </section>
+
+    <footer class="foot muted">
+      Soal &amp; penilaian oleh <a href="https://codeforces.com" target="_blank" rel="noopener">Codeforces</a>.
+      Paket baru dibuat otomatis setiap Senin 00:05 WIB.
+    </footer>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>

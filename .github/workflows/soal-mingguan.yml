@@ -1,0 +1,66 @@
+name: Soal Mingguan
+
+on:
+  schedule:
+    # Minggu 17:05 UTC = Senin 00:05 WIB
+    - cron: '5 17 * * 0'
+  workflow_dispatch:
+    inputs:
+      min_rating:
+        description: 'Rating minimum baru (kosongkan jika tidak diubah)'
+        required: false
+        default: ''
+      max_rating:
+        description: 'Rating maksimum baru (kosongkan jika tidak diubah)'
+        required: false
+        default: ''
+      regenerate:
+        description: 'Ganti soal minggu ini dengan soal baru'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: soal-mingguan
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Pilih soal minggu ini
+        run: node scripts/generate-week.mjs
+        env:
+          MIN_RATING: ${{ inputs.min_rating }}
+          MAX_RATING: ${{ inputs.max_rating }}
+          REGENERATE: ${{ inputs.regenerate }}
+      - name: Baca progres TLX & AtCoder
+        run: node scripts/update-progress.mjs
+      - name: Simpan ke repository
+        run: |
+          if git diff --quiet; then
+            echo "Tidak ada perubahan."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add config.json data/weeks.json data/progress.json
+          git commit -m "Paket soal minggu $(date -u +%Y-%m-%d)"
+          git pull --rebase
+          git push
+
+  deploy:
+    needs: generate
+    uses: ./.github/workflows/deploy.yml
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
