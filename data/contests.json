@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-12T22:43:04.659Z",
+  "updatedAt": "2026-10-13T22:53:53.810Z",
   "failed": [],
   "contests": [
     {
@@ -31,7 +31,7 @@
     },
     {
       "platform": "Codeforces",
-      "name": "WorldQuant Round 1 (Codeforces Round Div. 1 + Div. 2)",
+      "name": "WorldQuant Round 1 (Codeforces Round 1128, Div. 1 + Div. 2)",
       "start": 1792247700,
       "duration": 10800,
       "url": "https://codeforces.com/contests",
@@ -64,6 +64,24 @@
       "url": "https://atcoder.jp/contests/ahc074",
       "register": null,
       "tier": "lanjut"
+    },
+    {
+      "platform": "AtCoder",
+      "name": "AtCoder Beginner Contest 482",
+      "start": 1793448000,
+      "duration": 6000,
+      "url": "https://atcoder.jp/contests/abc482",
+      "register": null,
+      "tier": "cocok"
+    },
+    {
+      "platform": "AtCoder",
+      "name": "AtCoder Beginner Contest 483",
+      "start": 1794052800,
+      "duration": 6000,
+      "url": "https://atcoder.jp/contests/abc483",
+      "register": null,
+      "tier": "cocok"
     },
     {
       "platform": "AtCoder",
