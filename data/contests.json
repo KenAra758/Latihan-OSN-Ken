@@ -1,17 +1,7 @@
 {
-  "updatedAt": "2026-10-14T00:32:42.806Z",
+  "updatedAt": "2026-10-14T22:53:43.626Z",
   "failed": [],
   "contests": [
-    {
-      "platform": "Codeforces",
-      "id": "2276",
-      "name": "Educational Codeforces Round 195 (Rated for Div. 2)",
-      "start": 1791988500,
-      "duration": 7200,
-      "url": "https://codeforces.com/contests",
-      "register": "https://codeforces.com/contestRegistration/2276",
-      "tier": "cocok"
-    },
     {
       "platform": "AtCoder",
       "name": "AtCoder Heuristic Contest 073",
@@ -38,6 +28,16 @@
       "duration": 10800,
       "url": "https://codeforces.com/contests",
       "register": "https://codeforces.com/contestRegistration/2261",
+      "tier": "tantangan"
+    },
+    {
+      "platform": "Codeforces",
+      "id": "2277",
+      "name": "Codeforces Round (Div. 2)",
+      "start": 1792839900,
+      "duration": 7200,
+      "url": "https://codeforces.com/contests",
+      "register": "https://codeforces.com/contestRegistration/2277",
       "tier": "tantangan"
     },
     {
