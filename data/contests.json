@@ -1,9 +1,10 @@
 {
-  "updatedAt": "2026-10-13T22:53:53.810Z",
+  "updatedAt": "2026-10-14T00:32:42.806Z",
   "failed": [],
   "contests": [
     {
       "platform": "Codeforces",
+      "id": "2276",
       "name": "Educational Codeforces Round 195 (Rated for Div. 2)",
       "start": 1791988500,
       "duration": 7200,
@@ -31,6 +32,7 @@
     },
     {
       "platform": "Codeforces",
+      "id": "2261",
       "name": "WorldQuant Round 1 (Codeforces Round 1128, Div. 1 + Div. 2)",
       "start": 1792247700,
       "duration": 10800,
@@ -49,6 +51,7 @@
     },
     {
       "platform": "Codeforces",
+      "id": "2272",
       "name": "Codeforces Round (Div. 2)",
       "start": 1793025300,
       "duration": 8100,

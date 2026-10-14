@@ -458,6 +458,14 @@
     return `<span class="when-badge ${cls}">${urgent ? 'Segera · ' : ''}${text}</span>`;
   }
 
+  function kenInBadge(c) {
+    if (c.platform !== 'Codeforces' || !c.id) return '';
+    const mine = myContests().find((m) => m.platform === 'Codeforces' && m.id === c.id);
+    if (!mine) return '';
+    const solved = mine.problems.filter((p) => p.status === 'ok').length;
+    return `<span class="ken-in">Ken ikut · ${solved} soal benar</span>`;
+  }
+
   function contestItem(c, now) {
     const plat = PLATFORM_CLASS[c.platform] || '';
     const actions = [`<a href="${esc(c.url)}" target="_blank" rel="noopener">Buka</a>`];
@@ -473,10 +481,86 @@
           <span>${fmtDate(c.start, { hour: '2-digit', minute: '2-digit' })} WIB · ${fmtDuration(c.duration)}</span>
           <span class="tier ${c.tier}">${TIER_LABEL[c.tier] || c.tier}</span>
           ${relTime(c, now)}
+          ${kenInBadge(c)}
         </div>
       </div>
       <div class="c-actions">${actions.join('')}</div>
     </li>`;
+  }
+
+  // ---------- Kontes yang diikuti Ken ----------
+  const CF_PARTICIPANT = { CONTESTANT: 'resmi', OUT_OF_COMPETITION: 'tidak resmi', VIRTUAL: 'virtual' };
+
+  // Gabungkan riwayat dari progress.json dengan submission Codeforces terbaru di browser,
+  // sehingga kontes Codeforces yang sedang berlangsung langsung terlihat progresnya.
+  function myContests() {
+    const now = Date.now() / 1000;
+    const list = (state.progress?.contestHistory || []).map((c) => ({ ...c }));
+    const byCf = new Map();
+    for (const s of state.subs) {
+      const type = CF_PARTICIPANT[s.author?.participantType];
+      if (!type || !s.contestId) continue;
+      const e = byCf.get(s.contestId) || { type, start: s.author.startTimeSeconds, subs: [] };
+      e.subs.push(s);
+      byCf.set(s.contestId, e);
+    }
+    for (const [id, e] of byCf) {
+      const sched = (state.contests?.contests || []).find((c) => c.platform === 'Codeforces' && c.id === String(id));
+      let entry = list.find((c) => c.platform === 'Codeforces' && c.id === String(id));
+      if (!entry) {
+        entry = {
+          platform: 'Codeforces', id: String(id), name: sched?.name || `Kontes Codeforces ${id}`,
+          url: `https://codeforces.com/contest/${id}`, start: e.start, duration: sched?.duration ?? null,
+          participation: e.type, rank: null, problems: [], rated: false,
+        };
+        list.push(entry);
+      }
+      const labels = new Set(entry.problems.map((p) => p.label));
+      e.subs.forEach((s) => labels.add(s.problem.index));
+      entry.problems = [...labels].sort((a, b) => a.localeCompare(b, 'en', { numeric: true })).map((label) => {
+        const mine = e.subs.filter((s) => s.problem.index === label);
+        return { label, status: mine.some((s) => s.verdict === 'OK') ? 'ok' : mine.length ? 'tried' : 'none' };
+      });
+      const duration = entry.duration ?? sched?.duration;
+      entry.live = !!duration && entry.start <= now && now < entry.start + duration;
+    }
+    return list.sort((a, b) => b.start - a.start);
+  }
+
+  function renderMyContests() {
+    const ul = $('my-contest-list');
+    const list = myContests();
+    if (!list.length) {
+      ul.innerHTML = '<li class="empty">Belum ada kontes yang diikuti. Kontes pertama akan muncul di sini setelah Ken mengirim jawaban.</li>';
+      return;
+    }
+    ul.innerHTML = list.map((c) => {
+      const solved = c.problems.filter((p) => p.status === 'ok').length;
+      const chips = c.problems.map((p) => `<span class="pchip ${p.status}" title="${p.status === 'ok' ? 'Benar' : p.status === 'tried' ? 'Dicoba, belum benar' : 'Tidak dicoba'}">${esc(p.label)}${p.status === 'ok' ? ' ✓' : p.status === 'tried' ? ' ✗' : ''}</span>`).join('');
+      let rating = '<span>unrated</span>';
+      if (c.rated && c.newRating != null) {
+        const d = c.newRating - (c.oldRating ?? 0);
+        rating = `<span>rating ${c.oldRating} → ${c.newRating} <span class="${d >= 0 ? 'delta-up' : 'delta-down'}">(${d >= 0 ? '+' : ''}${d})</span></span>`;
+        if (c.performance) rating += `<span>performa ${c.performance}</span>`;
+      }
+      const result = c.live
+        ? `<b>${solved} soal</b>sedang berjalan`
+        : `<b>${solved}/${c.problems.length}</b>${c.rank ? `peringkat ${c.rank.toLocaleString('id-ID')}` : 'soal benar'}`;
+      return `<li class="contest ${c.live ? 'live' : ''}">
+        <div class="c-when"><span>${fmtDate(c.start, { weekday: 'short' })}</span><b>${fmtDate(c.start, { day: 'numeric' })}</b><span>${fmtDate(c.start, { month: 'short', year: '2-digit' })}</span></div>
+        <div class="c-main">
+          <a class="c-name" href="${esc(c.url)}" target="_blank" rel="noopener">${esc(c.name)}</a>
+          <div class="c-sub">
+            <span class="c-plat ${PLATFORM_CLASS[c.platform] || ''}">${esc(c.platform)}</span>
+            ${c.live ? '<span class="when-badge urgent">Sedang berlangsung</span>' : ''}
+            <span>${esc(c.participation || '')}</span>
+            ${rating}
+          </div>
+          <div class="pchips">${chips}</div>
+        </div>
+        <div class="c-result">${result}</div>
+      </li>`;
+    }).join('');
   }
 
   function liveContests() {
@@ -485,6 +569,7 @@
   }
 
   function renderContests() {
+    renderMyContests();
     const now = Date.now() / 1000;
     const list = $('contest-list');
     const updated = $('contest-updated');

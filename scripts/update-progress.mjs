@@ -6,6 +6,7 @@
 
 import fs from 'node:fs/promises';
 import { tlxSubmissions, summarizeSubmissions, tlxCourse } from './lib/tlx.mjs';
+import { codeforcesHistory, atcoderHistory } from './lib/contest-history.mjs';
 
 const ROOT = new URL('..', import.meta.url);
 const CONFIG_FILE = new URL('config.json', ROOT);
@@ -92,6 +93,24 @@ async function main() {
       console.warn(`AtCoder gagal: ${e.message}`);
     }
   }
+
+  // Riwayat kontes: jika satu sumber gagal, pertahankan data lama sumber itu.
+  const oldHistory = previous.contestHistory || [];
+  const history = [];
+  for (const [platform, handle, load] of [
+    ['Codeforces', config.handle, codeforcesHistory],
+    ['AtCoder', config.atcoderHandle, atcoderHistory],
+  ]) {
+    if (!handle) continue;
+    try {
+      history.push(...(await load(handle, platform === 'AtCoder' ? oldHistory.filter((c) => c.platform === 'AtCoder') : undefined)));
+    } catch (e) {
+      console.warn(`Riwayat kontes ${platform} gagal: ${e.message}`);
+      history.push(...oldHistory.filter((c) => c.platform === platform));
+    }
+  }
+  out.contestHistory = history.sort((a, b) => b.start - a.start);
+  console.log(`Riwayat kontes: ${out.contestHistory.length} kontes.`);
 
   // Hanya tulis jika isinya berubah, agar tidak ada commit kosong.
   const { updatedAt: _a, ...before } = previous;

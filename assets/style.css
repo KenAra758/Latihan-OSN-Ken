@@ -346,3 +346,20 @@ a.chip { text-decoration: none; color: inherit; }
 .dot-live { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); display: inline-block; animation: blink 1.6s ease-in-out infinite; }
 @keyframes blink { 50% { opacity: .3; } }
 @media (prefers-reduced-motion: reduce) { .dot-live { animation: none; } }
+
+/* Kontes yang diikuti */
+.section-title { font-size: 20px; margin-top: 8px; }
+.my-contests { gap: 0 !important; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+.my-contests .contest { border-top: 1px solid var(--line); }
+.my-contests .contest:first-child { border-top: 0; }
+.my-contests .contest.live { background: linear-gradient(90deg, var(--urgent-soft), transparent 70%); box-shadow: inset 4px 0 0 var(--urgent); }
+.pchips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+.pchip { font-family: var(--font-mono); font-size: 12px; font-weight: 700; min-width: 30px; text-align: center; padding: 1px 6px; border-radius: 5px; border: 1px solid var(--line); color: var(--muted); }
+.pchip.ok { background: var(--ok-soft); color: var(--ok); border-color: transparent; }
+.pchip.tried { background: var(--late-soft); color: var(--late); border-color: transparent; }
+.c-result { text-align: right; font-size: 13px; color: var(--muted); white-space: nowrap; }
+.c-result b { display: block; font-family: var(--font-mono); font-size: 18px; color: var(--ink); }
+.delta-up { color: var(--ok); font-weight: 700; }
+.delta-down { color: var(--bad); font-weight: 700; }
+.ken-in { font-weight: 700; color: var(--urgent); }
+@media (max-width: 560px) { .c-result { grid-column: 2; text-align: left; } .c-result b { display: inline; margin-right: 6px; } }

@@ -41,6 +41,7 @@ async function codeforces() {
     .filter((c) => c.phase === 'BEFORE' || c.phase === 'CODING')
     .map((c) => ({
       platform: 'Codeforces',
+      id: String(c.id),
       name: c.name,
       start: c.startTimeSeconds,
       duration: c.durationSeconds,
