@@ -363,3 +363,18 @@ a.chip { text-decoration: none; color: inherit; }
 .delta-down { color: var(--bad); font-weight: 700; }
 .ken-in { font-weight: 700; color: var(--urgent); }
 @media (max-width: 560px) { .c-result { grid-column: 2; text-align: left; } .c-result b { display: inline; margin-right: 6px; } }
+
+/* Tanda bersama (Firebase) */
+.mini-btn { display: inline-block; margin-top: 6px; font: 600 12px var(--font-body); padding: 3px 10px; border-radius: 6px; border: 1px solid var(--accent); background: var(--accent); color: var(--surface); cursor: pointer; white-space: nowrap; }
+.mini-btn.ghost { background: transparent; color: var(--muted); border-color: var(--line); }
+.p-status .mini-btn { display: block; margin-left: auto; }
+.c-actions .mini-btn { margin-top: 0; }
+.reg-badge { font-size: 12px; font-weight: 700; padding: 0 8px; border-radius: 999px; background: var(--ok); color: var(--surface); white-space: nowrap; }
+.contest.registered .c-when b { color: var(--ok); }
+.sync { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 16px; font-size: 14px; }
+.sync-form { display: grid; gap: 8px; }
+.sync-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.sync-row input { flex: 1 1 160px; min-width: 0; padding: 7px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); font: inherit; }
+.sync-ok { color: var(--ok); font-weight: 600; }
+.sync-err { margin: 0; color: var(--bad); font-size: 13px; }
+@media (max-width: 560px) { .p-status .mini-btn { margin-left: 0; } }

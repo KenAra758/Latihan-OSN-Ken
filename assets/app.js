@@ -11,6 +11,8 @@
     contests: null,
     progress: null,
     tab: 'minggu',
+    // Tanda yang dibagi antar perangkat lewat Firebase (sudah daftar kontes, mulai kerjakan soal).
+    sync: { url: null, pin: null, ok: false, error: null, data: { registered: {}, started: {} } },
   };
 
   const $ = (id) => document.getElementById(id);
@@ -65,6 +67,89 @@
     return fmtDate(sec, { day: 'numeric', month: 'short' });
   }
 
+  // ---------- Sinkronisasi antar perangkat (Firebase Realtime Database) ----------
+  // Data disimpan di /k/<PIN>/..., dan aturan database hanya mengizinkan PIN keluarga.
+  // PIN tidak ada di kode situs; setiap perangkat memasukkannya sekali (tersimpan di browser).
+  const fbKey = (s) => String(s).replace(/[.#$\[\]\/]/g, '_');
+  const syncBase = () => `${state.sync.url.replace(/\/$/, '')}/k/${encodeURIComponent(state.sync.pin)}`;
+
+  async function syncLoad() {
+    const sy = state.sync;
+    if (!sy.url || !sy.pin) { sy.ok = false; return false; }
+    try {
+      const res = await fetch(`${syncBase()}.json`, { cache: 'no-store' });
+      if (res.status === 401 || res.status === 403) { sy.ok = false; sy.error = 'PIN salah'; return false; }
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = (await res.json()) || {};
+      const next = { registered: data.registered || {}, started: data.started || {} };
+      const changed = !sy.ok || JSON.stringify(next) !== JSON.stringify(sy.data);
+      sy.data = next;
+      sy.ok = true;
+      sy.error = null;
+      return changed;
+    } catch (e) {
+      sy.error = 'Tidak bisa terhubung';
+      return false;
+    }
+  }
+
+  async function syncWrite(group, key, value) {
+    const sy = state.sync;
+    if (value == null) delete sy.data[group][key];
+    else sy.data[group][key] = value;
+    renderAll();
+    try {
+      const res = await fetch(`${syncBase()}/${group}/${key}.json`, {
+        method: value == null ? 'DELETE' : 'PUT',
+        body: value == null ? undefined : JSON.stringify(value),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    } catch (_) {
+      $('banner').textContent = 'Tanda belum tersimpan karena koneksi bermasalah. Coba lagi sebentar lagi.';
+      $('banner').hidden = false;
+      await syncLoad();
+      renderAll();
+    }
+  }
+
+  const cfProblemKey = (p) => fbKey(`cf_${p.contestId}${p.index}`);
+  const tlxProblemKey = (b) => fbKey(`tlx_${b.problemJid}`);
+  const contestKey = (c) => fbKey(`${c.platform}_${c.id || c.url.split('/').filter(Boolean).pop()}`);
+
+  function startedInfo(key) {
+    const at = state.sync.ok ? state.sync.data.started[key]?.at : null;
+    if (!at) return null;
+    const sec = Math.round(at / 1000);
+    return { kind: 'started', attempts: 0, lastAt: sec, startedAt: sec, active: Date.now() / 1000 - sec < ACTIVE_SEC };
+  }
+
+  function startButton(key, s) {
+    if (!state.sync.ok) return '';
+    if (s.kind === 'todo') return `<button class="mini-btn" data-start="${key}">Mulai kerjakan</button>`;
+    if (s.kind === 'started') return `<button class="mini-btn ghost" data-unstart="${key}" title="Hapus tanda mulai">Batal</button>`;
+    return '';
+  }
+
+  function renderSyncBox() {
+    const el = $('sync');
+    const sy = state.sync;
+    if (!sy.url) { el.hidden = true; return; }
+    el.hidden = false;
+    if (sy.ok) {
+      el.innerHTML = `<span class="sync-ok">● Perangkat ini tersambung</span> <button class="link-btn" data-sync="logout">Putuskan</button>`;
+      return;
+    }
+    if (document.activeElement?.id === 'sync-pin') return; // jangan ganggu saat sedang mengetik
+    el.innerHTML = `<form class="sync-form" id="sync-form">
+        <label for="sync-pin">Sambungkan perangkat ini dengan PIN keluarga untuk memakai tombol "Tandai sudah daftar" dan "Mulai kerjakan":</label>
+        <div class="sync-row">
+          <input id="sync-pin" type="password" autocomplete="off" placeholder="PIN" required>
+          <button type="submit" class="btn-ghost">Sambungkan</button>
+        </div>
+        ${sy.error ? `<p class="sync-err">${esc(sy.error)}. Periksa lagi PIN-nya.</p>` : ''}
+      </form>`;
+  }
+
   // ---------- Status soal dari submission Codeforces ----------
   function statusOf(problem, week) {
     const name = problem.name.trim().toLowerCase();
@@ -72,7 +157,7 @@
       (s) => s.problem && ((s.problem.contestId === problem.contestId && s.problem.index === problem.index) ||
         s.problem.name.trim().toLowerCase() === name)
     );
-    if (!mine.length) return { kind: 'todo', attempts: 0 };
+    if (!mine.length) return startedInfo(cfProblemKey(problem)) || { kind: 'todo', attempts: 0 };
     const ok = mine.filter((s) => s.verdict === 'OK').sort((a, b) => a.creationTimeSeconds - b.creationTimeSeconds)[0];
     if (!ok) {
       const lastAt = Math.max(...mine.map((s) => s.creationTimeSeconds));
@@ -87,6 +172,9 @@
   function progressStatus(s, extra) {
     const label = s.active ? 'Sedang dikerjakan' : 'Proses';
     const cls = s.active ? 'active' : 'proses';
+    if (s.kind === 'started') {
+      return `<span class="status ${cls}">${label}</span><small>mulai ${agoText(s.startedAt)} · belum submit</small>`;
+    }
     const last = s.lastAt ? ` · terakhir ${agoText(s.lastAt)}` : '';
     return `<span class="status ${cls}">${label}${extra ? ` · ${extra}` : ''}</span><small>${s.attempts}× submit${last}</small>`;
   }
@@ -103,7 +191,7 @@
 
   function bonusStatusOf(b, week) {
     const e = state.progress?.tlx?.problems?.[b.problemJid];
-    if (!e || !e.attempts) return { kind: 'todo', attempts: 0 };
+    if (!e || !e.attempts) return startedInfo(tlxProblemKey(b)) || { kind: 'todo', attempts: 0 };
     if (e.solvedAt) return { kind: e.solvedAt < week.deadline ? 'ok' : 'late', attempts: e.attempts, at: e.solvedAt, best: 100 };
     const active = !!e.lastAt && Date.now() / 1000 - e.lastAt < ACTIVE_SEC;
     if (e.best > 0) return { kind: 'partial', attempts: e.attempts, best: e.best, lastAt: e.lastAt, active };
@@ -194,10 +282,12 @@
       if (s.kind === 'ok') status = `<span class="status ok">Selesai</span><small>${fmtDate(s.at, { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })} · ${s.attempts}× submit</small>`;
       else if (s.kind === 'late') status = `<span class="status late">Susulan</span><small>${fmtDate(s.at, { day: 'numeric', month: 'short' })} · ${s.attempts}× submit</small>`;
       else if (s.kind === 'tried') status = progressStatus(s, 'belum AC');
+      else if (s.kind === 'started') status = progressStatus(s);
       else status = `<span class="status todo">Belum</span>`;
+      status += startButton(cfProblemKey(p), s);
       const tags = showTags && p.tags.length
         ? `<span class="tags">${p.tags.map((t) => `<span class="tag">${esc(t)}</span>`).join('')}</span>` : '';
-      const rowClass = s.kind === 'ok' ? 'solved' : s.kind === 'late' ? 'late' : s.active ? 'working' : s.attempts ? 'inprogress' : '';
+      const rowClass = s.kind === 'ok' ? 'solved' : s.kind === 'late' ? 'late' : s.active ? 'working' : (s.attempts || s.kind === 'started') ? 'inprogress' : '';
       return `<li class="problem ${rowClass}">
         <span class="p-label">${esc(p.label)}</span>
         <div class="p-main">
@@ -237,8 +327,10 @@
       else if (s.kind === 'late') status = `<span class="status late">Susulan</span><small>${fmtDate(s.at, { day: 'numeric', month: 'short' })} · ${s.attempts}× submit</small>`;
       else if (s.kind === 'partial') status = progressStatus(s, `skor ${s.best}`);
       else if (s.kind === 'tried') status = progressStatus(s, 'skor 0');
+      else if (s.kind === 'started') status = progressStatus(s);
       else status = `<span class="status todo">Belum</span>`;
-      const rowClass = s.kind === 'ok' ? 'solved' : s.kind === 'late' ? 'late' : s.active ? 'working' : s.attempts ? 'inprogress' : '';
+      status += startButton(tlxProblemKey(b), s);
+      const rowClass = s.kind === 'ok' ? 'solved' : s.kind === 'late' ? 'late' : s.active ? 'working' : (s.attempts || s.kind === 'started') ? 'inprogress' : '';
       return `<li class="problem ${rowClass}">
         <span class="p-label">B${i + 1}</span>
         <div class="p-main">
@@ -258,7 +350,7 @@
       ...(w.bonus || []).map((b, i) => ({ label: `B${i + 1}`, s: bonusStatusOf(b, w) })),
     ];
     const active = items.filter((x) => x.s.active).map((x) => x.label);
-    const proses = items.filter((x) => !x.s.active && (x.s.kind === 'tried' || x.s.kind === 'partial')).map((x) => x.label);
+    const proses = items.filter((x) => !x.s.active && ['tried', 'partial', 'started'].includes(x.s.kind)).map((x) => x.label);
     const parts = [];
     if (active.length) parts.push(`<span class="dot-live" aria-hidden="true"></span><strong>Sedang dikerjakan: ${active.join(', ')}</strong>`);
     if (proses.length) parts.push(`<span>Proses: ${proses.join(', ')}</span>`);
@@ -468,11 +560,18 @@
 
   function contestItem(c, now) {
     const plat = PLATFORM_CLASS[c.platform] || '';
+    const key = contestKey(c);
+    const registered = state.sync.ok && !!state.sync.data.registered[key];
     const actions = [`<a href="${esc(c.url)}" target="_blank" rel="noopener">Buka</a>`];
-    if (c.register && c.start > now) actions.unshift(`<a class="primary" href="${esc(c.register)}" target="_blank" rel="noopener">Daftar</a>`);
+    if (state.sync.ok && c.start > now) {
+      actions.push(registered
+        ? `<button class="mini-btn ghost" data-unreg="${key}" title="Hapus tanda terdaftar">Batal tanda</button>`
+        : `<button class="mini-btn" data-reg="${key}">Tandai sudah daftar</button>`);
+    }
+    if (c.register && c.start > now && !registered) actions.unshift(`<a class="primary" href="${esc(c.register)}" target="_blank" rel="noopener">Daftar</a>`);
     if (c.start > now) actions.push(`<a href="${esc(calendarUrl(c))}" target="_blank" rel="noopener">+ Kalender</a>`);
     const urgency = c.start - now < URGENT_SEC ? 'urgent' : 'calm';
-    return `<li class="contest ${urgency}">
+    return `<li class="contest ${urgency}${registered ? ' registered' : ''}">
       <div class="c-when"><span>${fmtDate(c.start, { weekday: 'short' })}</span><b>${fmtDate(c.start, { day: 'numeric' })}</b><span>${fmtDate(c.start, { month: 'short' })}</span></div>
       <div class="c-main">
         <a class="c-name" href="${esc(c.url)}" target="_blank" rel="noopener">${esc(c.name)}</a>
@@ -480,6 +579,7 @@
           <span class="c-plat ${plat}">${esc(c.platform)}</span>
           <span>${fmtDate(c.start, { hour: '2-digit', minute: '2-digit' })} WIB · ${fmtDuration(c.duration)}</span>
           <span class="tier ${c.tier}">${TIER_LABEL[c.tier] || c.tier}</span>
+          ${registered ? '<span class="reg-badge">✓ Terdaftar</span>' : ''}
           ${relTime(c, now)}
           ${kenInBadge(c)}
         </div>
@@ -712,6 +812,7 @@
     renderStats();
     renderTopics();
     renderContests();
+    renderSyncBox();
   }
 
   // ---------- Data ----------
@@ -757,9 +858,16 @@
     document.title = $('title').textContent;
     state.viewIndex = currentWeekIndex();
     $('show-tags').checked = store('showTags') === '1';
+    state.sync.url = state.config.firebase?.databaseURL || null;
+    state.sync.pin = store('syncPin');
     renderAll();
-    await loadCodeforces();
+    await Promise.all([loadCodeforces(), syncLoad()]);
     renderAll();
+    // Ambil tanda terbaru dari perangkat lain setiap menit.
+    setInterval(async () => {
+      if (document.hidden || !state.sync.ok) return;
+      if (await syncLoad()) renderAll();
+    }, 60000);
   }
 
   document.querySelector('.tabs').addEventListener('click', (e) => {
@@ -784,6 +892,34 @@
     if (b) selectTab(b.dataset.goto);
   });
   setInterval(renderContests, 60000);
+  document.addEventListener('click', (e) => {
+    const t = e.target.closest('[data-start],[data-unstart],[data-reg],[data-unreg],[data-sync]');
+    if (!t) return;
+    const value = { at: Date.now() };
+    if (t.dataset.start) syncWrite('started', t.dataset.start, value);
+    else if (t.dataset.unstart) syncWrite('started', t.dataset.unstart, null);
+    else if (t.dataset.reg) syncWrite('registered', t.dataset.reg, value);
+    else if (t.dataset.unreg) syncWrite('registered', t.dataset.unreg, null);
+    else if (t.dataset.sync === 'logout') {
+      try { localStorage.removeItem('syncPin'); } catch (_) { /* abaikan */ }
+      state.sync.pin = null;
+      state.sync.ok = false;
+      renderAll();
+    }
+  });
+  document.addEventListener('submit', async (e) => {
+    if (e.target.id !== 'sync-form') return;
+    e.preventDefault();
+    const input = $('sync-pin');
+    const pin = input.value.trim();
+    if (!pin) return;
+    input.blur();
+    state.sync.pin = pin;
+    await syncLoad();
+    if (state.sync.ok) store('syncPin', pin);
+    else state.sync.pin = null;
+    renderAll();
+  });
   $('history-body').addEventListener('click', (e) => {
     const b = e.target.closest('[data-open]');
     if (!b) return;

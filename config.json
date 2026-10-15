@@ -32,5 +32,8 @@
       "osp",
       "osn"
     ]
+  },
+  "firebase": {
+    "databaseURL": ""
   }
 }
