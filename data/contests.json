@@ -1,7 +1,16 @@
 {
-  "updatedAt": "2026-10-14T22:53:43.626Z",
+  "updatedAt": "2026-10-15T22:52:44.038Z",
   "failed": [],
   "contests": [
+    {
+      "platform": "AtCoder",
+      "name": "AHC GenAI Rules Trial Contest 2026",
+      "start": 1792058400,
+      "duration": 259200,
+      "url": "https://atcoder.jp/contests/ahc_genai_test_2026",
+      "register": null,
+      "tier": "lanjut"
+    },
     {
       "platform": "AtCoder",
       "name": "AtCoder Heuristic Contest 073",
@@ -39,6 +48,15 @@
       "url": "https://codeforces.com/contests",
       "register": "https://codeforces.com/contestRegistration/2277",
       "tier": "tantangan"
+    },
+    {
+      "platform": "AtCoder",
+      "name": "SMBC Programming Contest #2 (AtCoder Beginner Contest 481）",
+      "start": 1792843200,
+      "duration": 6000,
+      "url": "https://atcoder.jp/contests/abc481",
+      "register": null,
+      "tier": "cocok"
     },
     {
       "platform": "AtCoder",
