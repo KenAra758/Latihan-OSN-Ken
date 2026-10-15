@@ -34,6 +34,6 @@
     ]
   },
   "firebase": {
-    "databaseURL": ""
+    "databaseURL": "https://osn-informatika-ken-default-rtdb.asia-southeast1.firebasedatabase.app"
   }
 }
