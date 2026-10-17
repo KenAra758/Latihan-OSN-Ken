@@ -378,3 +378,6 @@ a.chip { text-decoration: none; color: inherit; }
 .sync-ok { color: var(--ok); font-weight: 600; }
 .sync-err { margin: 0; color: var(--bad); font-size: 13px; }
 @media (max-width: 560px) { .p-status .mini-btn { margin-left: 0; } }
+
+/* Soal ulangan */
+.repeat { font-size: 12px; font-weight: 700; color: var(--r-violet); background: var(--accent-soft); padding: 0 7px; border-radius: 999px; white-space: nowrap; }

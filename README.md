@@ -3,7 +3,7 @@
 Website latihan Codeforces untuk persiapan OSN Informatika. Formatnya mirip program Infinity Castle:
 
 - Setiap **Senin 00:05 WIB** otomatis muncul **8 soal baru** dari Codeforces, dengan rating tersebar dari batas bawah sampai batas atas level (awal: 800–1400).
-- Soal yang pernah dicoba Ken atau pernah muncul di minggu sebelumnya tidak akan dipilih lagi.
+- Soal baru selalu yang belum pernah dicoba Ken. **Soal lama yang belum selesai bisa muncul lagi** (ditandai "↻ Ulangan"), tapi tidak di minggu berikutnya langsung, melainkan setelah diselingi minimal 1 minggu. Maksimal 3 soal ulangan + 1 bonus ulangan per minggu, dan satu soal paling banyak muncul 3 kali. Diatur di bagian `recycle` pada `config.json` (`gapWeeks`, `maxPerWeek`, `maxBonusPerWeek`, `maxAppearances`).
 - Ken mengerjakan dan submit **langsung di Codeforces**. Website membaca statusnya otomatis: **Selesai** (AC sebelum minggu berakhir), **Susulan** (AC setelah minggu berakhir), **Dicoba**, atau **Belum**.
 - **Bonus 2 soal OSN asli** setiap minggu dari arsip **TLX TOKI** (mulai dari OSN-P, soal termudah dulu, lalu OSN nasional). Soal yang sudah Ken selesaikan dengan skor 100 dilewati. Status dan skor subtask dibaca otomatis setiap 2 jam.
 - **Naik level otomatis:** jika Ken menyelesaikan ≥ 7 dari 8 soal selama 2 minggu berturut-turut, level berikutnya naik 100 (misalnya 800–1400 menjadi 900–1500).

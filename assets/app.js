@@ -179,6 +179,12 @@
     return `<span class="status ${cls}">${label}${extra ? ` · ${extra}` : ''}</span><small>${s.attempts}× submit${last}</small>`;
   }
 
+  // Penanda soal lama yang muncul lagi karena belum selesai.
+  function repeatBadge(p) {
+    if (!p.repeatFrom) return '';
+    return `<span class="repeat" title="Soal ini belum selesai di Minggu ${p.repeatFrom}, jadi muncul lagi">↻ Ulangan dari Minggu ${p.repeatFrom}</span>`;
+  }
+
   function weekScore(week) {
     let onTime = 0, late = 0;
     for (const p of week.problems) {
@@ -295,6 +301,7 @@
           <div class="p-sub">
             <span class="rating ${rankClass(p.rating)}">${p.rating}</span>
             <span>CF ${p.contestId}${esc(p.index)}</span>
+            ${repeatBadge(p)}
             ${tags}
           </div>
         </div>
@@ -335,7 +342,7 @@
         <span class="p-label">B${i + 1}</span>
         <div class="p-main">
           <a class="p-name" href="${esc(b.url)}" target="_blank" rel="noopener">${esc(b.name)}</a>
-          <div class="p-sub"><span class="src">TLX</span><span>${esc(b.set)} · soal ${esc(b.alias)}</span></div>
+          <div class="p-sub"><span class="src">TLX</span><span>${esc(b.set)} · soal ${esc(b.alias)}</span>${repeatBadge(b)}</div>
         </div>
         <div class="p-status">${status}</div>
       </li>`;
@@ -438,7 +445,10 @@
   // ---------- Render: statistik ----------
   function renderStats() {
     const weeks = state.weeks;
-    const allProblems = weeks.flatMap((w) => w.problems.map((p) => ({ p, s: statusOf(p, w) })));
+    // Soal ulangan muncul di beberapa minggu; hitung sekali saja (minggu terakhirnya).
+    const latest = new Map();
+    weeks.forEach((w) => w.problems.forEach((p) => latest.set(keyOf(p), { p, s: statusOf(p, w) })));
+    const allProblems = [...latest.values()];
     const solved = allProblems.filter((x) => x.s.kind === 'ok' || x.s.kind === 'late');
     const onTime = allProblems.filter((x) => x.s.kind === 'ok').length;
 

@@ -35,5 +35,12 @@
   },
   "firebase": {
     "databaseURL": "https://osn-informatika-ken-default-rtdb.asia-southeast1.firebasedatabase.app"
+  },
+  "recycle": {
+    "enabled": true,
+    "gapWeeks": 1,
+    "maxPerWeek": 3,
+    "maxBonusPerWeek": 1,
+    "maxAppearances": 3
   }
 }

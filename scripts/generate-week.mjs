@@ -155,13 +155,17 @@ async function main() {
   const { problems } = await cf('problemset.problems');
 
   const solvedKeys = new Set();
+  const solvedNames = new Set();
   const attemptedKeys = new Set();
   const attemptedNames = new Set();
   for (const s of submissions) {
     if (!s.problem?.contestId) continue;
     attemptedKeys.add(keyOf(s.problem));
     attemptedNames.add(nameKey(s.problem));
-    if (s.verdict === 'OK') solvedKeys.add(keyOf(s.problem));
+    if (s.verdict === 'OK') {
+      solvedKeys.add(keyOf(s.problem));
+      solvedNames.add(nameKey(s.problem));
+    }
   }
 
   // --- Tentukan level minggu ini ---
@@ -211,12 +215,35 @@ async function main() {
   );
 
   const count = config.problemsPerWeek || 8;
+  const weekNumber = existingIndex === -1 ? (weeks.at(-1)?.week ?? 0) + 1 : weeks[existingIndex].week;
   const rng = mulberry32(hashString(`${handle}:${start}:${args.regenerate ? Date.now() : ''}`));
-  const picked = pickProblems(candidates, ratingTargets(config.level.min, config.level.max, count), rng);
+  const targets = ratingTargets(config.level.min, config.level.max, count);
+
+  // Soal lama yang belum selesai boleh muncul lagi, asalkan sudah diselingi minimal `gapWeeks` minggu.
+  const recycled = [];
+  if (config.recycle?.enabled) {
+    const isSolved = (p) => solvedKeys.has(keyOf(p)) || solvedNames.has(nameKey(p));
+    const pool = recyclePool(weeks, existingIndex, weekNumber, config.recycle, (w) => w.problems, keyOf)
+      .filter(({ item }) => !isSolved(item) && item.rating >= config.level.min && item.rating <= config.level.max);
+    for (const { item, firstWeek, times } of pool) {
+      if (recycled.length >= (config.recycle.maxPerWeek ?? 3)) break;
+      // Ambil slot rating yang paling dekat (selisih maksimal 100).
+      let best = -1;
+      targets.forEach((t, i) => {
+        if (Math.abs(t - item.rating) <= 100 && (best === -1 || Math.abs(t - item.rating) < Math.abs(targets[best] - item.rating))) best = i;
+      });
+      if (best === -1) continue;
+      targets.splice(best, 1);
+      recycled.push({ ...item, repeatFrom: firstWeek, repeatCount: times });
+    }
+  }
+
+  const freshCandidates = candidates.filter((p) => !recycled.some((r) => keyOf(r) === keyOf(p)));
+  const picked = [...recycled, ...pickProblems(freshCandidates, targets, rng)].sort((a, b) => a.rating - b.rating);
   if (picked.length < count) throw new Error(`Hanya menemukan ${picked.length} soal untuk rentang ${config.level.min}-${config.level.max}.`);
 
   const week = {
-    week: existingIndex === -1 ? (weeks.at(-1)?.week ?? 0) + 1 : weeks[existingIndex].week,
+    week: weekNumber,
     start,
     end: addDays(start, 6),
     deadline: weekEndSeconds(start, tz),
@@ -229,6 +256,7 @@ async function main() {
       name: p.name,
       rating: p.rating,
       tags: p.tags,
+      ...(p.repeatFrom ? { repeatFrom: p.repeatFrom, repeatCount: p.repeatCount } : {}),
     })),
   };
   if (levelChange) week.levelChange = levelChange;
@@ -249,9 +277,35 @@ async function main() {
   if (week.bonus) printBonus(week.bonus);
 }
 
+// Soal dari minggu-minggu sebelumnya yang boleh muncul lagi: terakhir muncul paling lambat
+// `gapWeeks + 1` minggu lalu (jadi ada minggu selingan), dan belum melebihi `maxAppearances`.
+// Urutan: yang paling lama tidak muncul lebih dulu.
+function recyclePool(weeks, skipIndex, weekNumber, rule, pick, keyFn) {
+  const gap = rule.gapWeeks ?? 1;
+  const maxAppearances = rule.maxAppearances ?? 3;
+  const seen = new Map();
+  weeks.forEach((w, i) => {
+    if (i === skipIndex) return;
+    for (const item of pick(w) || []) {
+      const k = keyFn(item);
+      const e = seen.get(k) || { item, firstWeek: w.week, lastWeek: w.week, times: 0 };
+      e.item = item;
+      e.lastWeek = Math.max(e.lastWeek, w.week);
+      e.firstWeek = Math.min(e.firstWeek, w.week);
+      e.times++;
+      seen.set(k, e);
+    }
+  });
+  return [...seen.values()]
+    .filter((e) => e.lastWeek <= weekNumber - gap - 1 && e.times < maxAppearances)
+    .sort((a, b) => a.lastWeek - b.lastWeek || a.firstWeek - b.firstWeek);
+}
+
 // Soal bonus dari arsip OSN di TLX: ambil soal termudah yang belum pernah dipakai dan belum diselesaikan Ken.
+// Bonus lama yang belum skor 100 bisa kembali setelah diselingi minggu (lihat `recycle` di config).
 async function pickTlxBonus(config, weeks, skipIndex) {
   const { perWeek = 2, archives = ['osp', 'osn'] } = config.tlxBonus;
+  const weekNumber = skipIndex !== -1 ? weeks[skipIndex].week : (weeks.at(-1)?.week ?? 0) + 1;
   const used = new Set(
     weeks.filter((_, i) => i !== skipIndex).flatMap((w) => (w.bonus || []).map((b) => b.problemJid))
   );
@@ -260,11 +314,23 @@ async function pickTlxBonus(config, weeks, skipIndex) {
     console.log(`Mengambil submission TLX untuk ${config.tlxUsername}...`);
     solved = summarizeSubmissions(await tlxSubmissions(config.tlxUsername));
   }
+  const notSolved = (jid) => (solved.get(jid)?.best ?? 0) < 100;
+
+  const chosen = [];
+  if (config.recycle?.enabled) {
+    const strip = ({ label, repeatFrom, repeatCount, ...b }) => b;
+    const back = recyclePool(weeks, skipIndex, weekNumber, config.recycle, (w) => w.bonus, (b) => b.problemJid)
+      .filter(({ item }) => notSolved(item.problemJid))
+      .slice(0, Math.min(config.recycle.maxBonusPerWeek ?? 1, perWeek));
+    for (const { item, firstWeek, times } of back) chosen.push({ ...strip(item), repeatFrom: firstWeek, repeatCount: times });
+  }
+
   const pool = await tlxPool(archives);
-  return pool
-    .filter((p) => !used.has(p.problemJid) && !((solved.get(p.problemJid)?.best ?? 0) >= 100))
-    .slice(0, perWeek)
-    .map((p, i) => ({ label: `Bonus ${i + 1}`, ...p }));
+  for (const p of pool) {
+    if (chosen.length >= perWeek) break;
+    if (!used.has(p.problemJid) && notSolved(p.problemJid)) chosen.push(p);
+  }
+  return chosen.map((p, i) => ({ label: `Bonus ${i + 1}`, ...p }));
 }
 
 function printBonus(bonus) {
