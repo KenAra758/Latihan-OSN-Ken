@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-16T22:54:04.016Z",
+  "updatedAt": "2026-10-17T22:47:44.475Z",
   "failed": [],
   "contests": [
     {
@@ -10,34 +10,6 @@
       "url": "https://atcoder.jp/contests/ahc_genai_test_2026",
       "register": null,
       "tier": "lanjut"
-    },
-    {
-      "platform": "AtCoder",
-      "name": "AtCoder Heuristic Contest 073",
-      "start": 1792216800,
-      "duration": 14400,
-      "url": "https://atcoder.jp/contests/ahc073",
-      "register": null,
-      "tier": "lanjut"
-    },
-    {
-      "platform": "AtCoder",
-      "name": "AtCoder Beginner Contest 480",
-      "start": 1792238400,
-      "duration": 6000,
-      "url": "https://atcoder.jp/contests/abc480",
-      "register": null,
-      "tier": "cocok"
-    },
-    {
-      "platform": "Codeforces",
-      "id": "2261",
-      "name": "WorldQuant Round 1 (Codeforces Round 1128, Div. 1 + Div. 2)",
-      "start": 1792247700,
-      "duration": 10800,
-      "url": "https://codeforces.com/contests",
-      "register": "https://codeforces.com/contestRegistration/2261",
-      "tier": "tantangan"
     },
     {
       "platform": "Codeforces",
@@ -76,6 +48,16 @@
       "url": "https://codeforces.com/contests",
       "register": "https://codeforces.com/contestRegistration/2272",
       "tier": "tantangan"
+    },
+    {
+      "platform": "Codeforces",
+      "id": "2278",
+      "name": "Codeforces Round (Div. 3)",
+      "start": 1793284500,
+      "duration": 8100,
+      "url": "https://codeforces.com/contests",
+      "register": "https://codeforces.com/contestRegistration/2278",
+      "tier": "cocok"
     },
     {
       "platform": "AtCoder",
