@@ -1,16 +1,7 @@
 {
-  "updatedAt": "2026-10-17T22:47:44.475Z",
+  "updatedAt": "2026-10-18T22:49:05.702Z",
   "failed": [],
   "contests": [
-    {
-      "platform": "AtCoder",
-      "name": "AHC GenAI Rules Trial Contest 2026",
-      "start": 1792058400,
-      "duration": 259200,
-      "url": "https://atcoder.jp/contests/ahc_genai_test_2026",
-      "register": null,
-      "tier": "lanjut"
-    },
     {
       "platform": "Codeforces",
       "id": "2277",
@@ -50,16 +41,6 @@
       "tier": "tantangan"
     },
     {
-      "platform": "Codeforces",
-      "id": "2278",
-      "name": "Codeforces Round (Div. 3)",
-      "start": 1793284500,
-      "duration": 8100,
-      "url": "https://codeforces.com/contests",
-      "register": "https://codeforces.com/contestRegistration/2278",
-      "tier": "cocok"
-    },
-    {
       "platform": "AtCoder",
       "name": "HACK TO THE FUTURE 2027 (AtCoder Heuristic Contest 074)",
       "start": 1793354400,
@@ -75,6 +56,16 @@
       "duration": 6000,
       "url": "https://atcoder.jp/contests/abc482",
       "register": null,
+      "tier": "cocok"
+    },
+    {
+      "platform": "Codeforces",
+      "id": "2278",
+      "name": "Codeforces Round (Div. 3)",
+      "start": 1793457300,
+      "duration": 8100,
+      "url": "https://codeforces.com/contests",
+      "register": "https://codeforces.com/contestRegistration/2278",
       "tier": "cocok"
     },
     {
