@@ -120,5 +120,127 @@
         "url": "https://tlx.toki.id/problems/osnp-2025/A"
       }
     ]
+  },
+  {
+    "week": 2,
+    "start": "2026-10-19",
+    "end": "2026-10-25",
+    "deadline": 1792947600,
+    "level": {
+      "min": 800,
+      "max": 1400
+    },
+    "generatedAt": "2026-10-18T17:20:59.295Z",
+    "problems": [
+      {
+        "label": "A",
+        "contestId": 1838,
+        "index": "A",
+        "name": "Blackboard List",
+        "rating": 800,
+        "tags": [
+          "constructive algorithms",
+          "math"
+        ]
+      },
+      {
+        "label": "B",
+        "contestId": 2102,
+        "index": "B",
+        "name": "The Picky Cat",
+        "rating": 900,
+        "tags": [
+          "implementation",
+          "sortings"
+        ]
+      },
+      {
+        "label": "C",
+        "contestId": 1395,
+        "index": "A",
+        "name": "Boboniu Likes to Color Balls",
+        "rating": 1000,
+        "tags": [
+          "brute force",
+          "math"
+        ]
+      },
+      {
+        "label": "D",
+        "contestId": 1365,
+        "index": "A",
+        "name": "Matrix Game",
+        "rating": 1100,
+        "tags": [
+          "games",
+          "greedy",
+          "implementation"
+        ]
+      },
+      {
+        "label": "E",
+        "contestId": 2193,
+        "index": "D",
+        "name": "Monster Game",
+        "rating": 1100,
+        "tags": [
+          "binary search",
+          "sortings",
+          "two pointers"
+        ]
+      },
+      {
+        "label": "F",
+        "contestId": 1559,
+        "index": "C",
+        "name": "Mocha and Hiking",
+        "rating": 1200,
+        "tags": [
+          "constructive algorithms",
+          "graphs"
+        ]
+      },
+      {
+        "label": "G",
+        "contestId": 1037,
+        "index": "B",
+        "name": "Reach Median",
+        "rating": 1300,
+        "tags": [
+          "greedy"
+        ]
+      },
+      {
+        "label": "H",
+        "contestId": 1974,
+        "index": "C",
+        "name": "Beautiful Triple Pairs",
+        "rating": 1400,
+        "tags": [
+          "combinatorics",
+          "data structures"
+        ]
+      }
+    ],
+    "bonus": [
+      {
+        "label": "Bonus 1",
+        "problemJid": "JIDPROGCjhRHGJZ8vdNZXqvK5dQ",
+        "set": "OSN-P Informatika 2024",
+        "setSlug": "osnp-2024",
+        "alias": "A",
+        "name": "String Cantik OSN",
+        "url": "https://tlx.toki.id/problems/osnp-2024/A"
+      },
+      {
+        "label": "Bonus 2",
+        "problemJid": "JIDPROGsQKMbeXV4MiF0M6x6Clw",
+        "set": "OSN-P Informatika 2023 - Bagian B",
+        "setSlug": "osnp-2023",
+        "alias": "B1",
+        "name": "Menjual Kentang",
+        "url": "https://tlx.toki.id/problems/osnp-2023/B1"
+      }
+    ]
   }
 ]
