@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-18T22:49:05.702Z",
+  "updatedAt": "2026-10-19T22:54:52.889Z",
   "failed": [],
   "contests": [
     {
@@ -85,6 +85,15 @@
       "url": "https://atcoder.jp/contests/agc079",
       "register": null,
       "tier": "lanjut"
+    },
+    {
+      "platform": "AtCoder",
+      "name": "AtCoder Beginner Contest 484",
+      "start": 1794657600,
+      "duration": 6000,
+      "url": "https://atcoder.jp/contests/abc484",
+      "register": null,
+      "tier": "cocok"
     }
   ]
 }
