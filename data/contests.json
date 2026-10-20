@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-19T22:54:52.889Z",
+  "updatedAt": "2026-10-20T22:55:24.640Z",
   "failed": [],
   "contests": [
     {
@@ -69,6 +69,16 @@
       "tier": "cocok"
     },
     {
+      "platform": "Codeforces",
+      "id": "2281",
+      "name": "ICPC 2026 Online Challenge 2 powered by Huawei",
+      "start": 1793876400,
+      "duration": 1209600,
+      "url": "https://codeforces.com/contests",
+      "register": "https://codeforces.com/contestRegistration/2281",
+      "tier": "lanjut"
+    },
+    {
       "platform": "AtCoder",
       "name": "AtCoder Beginner Contest 483",
       "start": 1794052800,
@@ -76,6 +86,26 @@
       "url": "https://atcoder.jp/contests/abc483",
       "register": null,
       "tier": "cocok"
+    },
+    {
+      "platform": "Codeforces",
+      "id": "2279",
+      "name": "Codeforces Round (Div. 1)",
+      "start": 1794062100,
+      "duration": 9000,
+      "url": "https://codeforces.com/contests",
+      "register": "https://codeforces.com/contestRegistration/2279",
+      "tier": "lanjut"
+    },
+    {
+      "platform": "Codeforces",
+      "id": "2280",
+      "name": "Codeforces Round (Div. 2)",
+      "start": 1794062100,
+      "duration": 9000,
+      "url": "https://codeforces.com/contests",
+      "register": "https://codeforces.com/contestRegistration/2280",
+      "tier": "tantangan"
     },
     {
       "platform": "AtCoder",
