@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-10-20T22:55:24.640Z",
+  "updatedAt": "2026-10-21T22:55:39.192Z",
   "failed": [],
   "contests": [
     {
       "platform": "Codeforces",
       "id": "2277",
-      "name": "Codeforces Round (Div. 2)",
+      "name": "Codeforces Round 1129 (Div. 2)",
       "start": 1792839900,
       "duration": 7200,
       "url": "https://codeforces.com/contests",
@@ -31,9 +31,18 @@
       "tier": "tantangan"
     },
     {
+      "platform": "TLX TOKI",
+      "name": "Indonesia National Contest 2026 Mirror (Rated)",
+      "start": 1792933500,
+      "duration": 7200,
+      "url": "https://tlx.toki.id/contests/inc-2026-mirror",
+      "register": null,
+      "tier": "cocok"
+    },
+    {
       "platform": "Codeforces",
       "id": "2272",
-      "name": "Codeforces Round (Div. 2)",
+      "name": "Codeforces Round 1130 (Div. 2)",
       "start": 1793025300,
       "duration": 8100,
       "url": "https://codeforces.com/contests",
@@ -61,7 +70,7 @@
     {
       "platform": "Codeforces",
       "id": "2278",
-      "name": "Codeforces Round (Div. 3)",
+      "name": "Codeforces Round 1131 (Div. 3)",
       "start": 1793457300,
       "duration": 8100,
       "url": "https://codeforces.com/contests",
