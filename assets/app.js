@@ -160,12 +160,56 @@
     if (!mine.length) return startedInfo(cfProblemKey(problem)) || { kind: 'todo', attempts: 0 };
     const ok = mine.filter((s) => s.verdict === 'OK').sort((a, b) => a.creationTimeSeconds - b.creationTimeSeconds)[0];
     if (!ok) {
-      const lastAt = Math.max(...mine.map((s) => s.creationTimeSeconds));
-      return { kind: 'tried', attempts: mine.length, lastAt, active: Date.now() / 1000 - lastAt < ACTIVE_SEC };
+      const last = mine.reduce((a, b) => (b.creationTimeSeconds > a.creationTimeSeconds ? b : a));
+      const lastAt = last.creationTimeSeconds;
+      return {
+        kind: 'tried', attempts: mine.length, lastAt, active: Date.now() / 1000 - lastAt < ACTIVE_SEC,
+        verdict: cfVerdict(last),
+      };
     }
     const attempts = mine.filter((s) => s.creationTimeSeconds <= ok.creationTimeSeconds).length;
     const onTime = ok.creationTimeSeconds < week.deadline;
     return { kind: onTime ? 'ok' : 'late', attempts, at: ok.creationTimeSeconds };
+  }
+
+  // Hasil submit terakhir: jenis kesalahan dan di test ke berapa (isi test case sengaja tidak ditampilkan).
+  const VERDICT = {
+    WRONG_ANSWER: ['WA', 'Jawaban salah'],
+    TIME_LIMIT_EXCEEDED: ['TLE', 'Terlalu lambat'],
+    MEMORY_LIMIT_EXCEEDED: ['MLE', 'Memori berlebih'],
+    RUNTIME_ERROR: ['RE', 'Program crash'],
+    COMPILATION_ERROR: ['CE', 'Gagal kompilasi'],
+    IDLENESS_LIMIT_EXCEEDED: ['ILE', 'Program diam/menunggu'],
+    PRESENTATION_ERROR: ['PE', 'Format keluaran salah'],
+    CHALLENGED: ['HACK', 'Gagal di-hack'],
+    SKIPPED: ['SKIP', 'Dilewati'],
+  };
+  const TLX_VERDICT = { WA: 'WRONG_ANSWER', TLE: 'TIME_LIMIT_EXCEEDED', MLE: 'MEMORY_LIMIT_EXCEEDED', RTE: 'RUNTIME_ERROR', RE: 'RUNTIME_ERROR', CE: 'COMPILATION_ERROR' };
+
+  function cfVerdict(sub) {
+    if (!sub.verdict || sub.verdict === 'TESTING') return { code: 'PENDING', text: 'Sedang dinilai…' };
+    const v = VERDICT[sub.verdict] || [sub.verdict, sub.verdict.toLowerCase().replace(/_/g, ' ')];
+    const withTest = !['COMPILATION_ERROR', 'SKIPPED', 'CHALLENGED'].includes(sub.verdict);
+    return {
+      code: v[0],
+      text: `${v[1]}${withTest ? ` di test ${sub.passedTestCount + 1}` : ''}`,
+      url: `https://codeforces.com/contest/${sub.contestId}/submission/${sub.id}`,
+    };
+  }
+
+  function tlxVerdict(e) {
+    if (!e.lastVerdict) return null;
+    const v = VERDICT[TLX_VERDICT[e.lastVerdict]];
+    const label = v ? v[1] : e.lastVerdict;
+    return { code: v ? v[0] : e.lastVerdict, text: `${label} · skor ${e.lastScore ?? 0}` };
+  }
+
+  function verdictLine(v) {
+    if (!v) return '';
+    const inner = `<span class="vcode v-${esc(v.code)}">${esc(v.code)}</span> ${esc(v.text)}`;
+    return v.url
+      ? `<a class="verdict" href="${esc(v.url)}" target="_blank" rel="noopener" title="Buka submit terakhir di Codeforces">Terakhir: ${inner}</a>`
+      : `<span class="verdict">Terakhir: ${inner}</span>`;
   }
 
   // Label untuk soal yang sudah dicoba tapi belum selesai.
@@ -176,7 +220,7 @@
       return `<span class="status ${cls}">${label}</span><small>mulai ${agoText(s.startedAt)} · belum submit</small>`;
     }
     const last = s.lastAt ? ` · terakhir ${agoText(s.lastAt)}` : '';
-    return `<span class="status ${cls}">${label}${extra ? ` · ${extra}` : ''}</span><small>${s.attempts}× submit${last}</small>`;
+    return `<span class="status ${cls}">${label}${extra ? ` · ${extra}` : ''}</span><small>${s.attempts}× submit${last}</small>${verdictLine(s.verdict)}`;
   }
 
   // Penanda soal lama yang muncul lagi karena belum selesai.
@@ -200,8 +244,9 @@
     if (!e || !e.attempts) return startedInfo(tlxProblemKey(b)) || { kind: 'todo', attempts: 0 };
     if (e.solvedAt) return { kind: e.solvedAt < week.deadline ? 'ok' : 'late', attempts: e.attempts, at: e.solvedAt, best: 100 };
     const active = !!e.lastAt && Date.now() / 1000 - e.lastAt < ACTIVE_SEC;
-    if (e.best > 0) return { kind: 'partial', attempts: e.attempts, best: e.best, lastAt: e.lastAt, active };
-    return { kind: 'tried', attempts: e.attempts, best: 0, lastAt: e.lastAt, active };
+    const verdict = tlxVerdict(e);
+    if (e.best > 0) return { kind: 'partial', attempts: e.attempts, best: e.best, lastAt: e.lastAt, active, verdict };
+    return { kind: 'tried', attempts: e.attempts, best: 0, lastAt: e.lastAt, active, verdict };
   }
 
   function bonusScore(week) {
@@ -325,8 +370,8 @@
     scoreEl.textContent = `+ Bonus OSN: ${bs.done}/${bs.count}`;
     const upd = state.progress?.updatedAt;
     $('bonus-updated').textContent = upd
-      ? `Status TLX diperbarui ${new Intl.DateTimeFormat('id-ID', { timeZone: TZ, day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }).format(new Date(upd))} WIB (setiap 2 jam)`
-      : 'Status TLX diperbarui setiap 2 jam';
+      ? `Status TLX dicek setiap 2 jam · perubahan terakhir ${new Intl.DateTimeFormat('id-ID', { timeZone: TZ, day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }).format(new Date(upd))} WIB`
+      : 'Status TLX dicek setiap 2 jam';
     $('bonus-list').innerHTML = list.map((b, i) => {
       const s = bonusStatusOf(b, w);
       let status;

@@ -42,6 +42,8 @@ export function summarizeSubmissions(subs) {
     const score = s.latestGrading?.score ?? 0;
     e.attempts++;
     e.lastAt = Math.round(s.time / 1000);
+    e.lastVerdict = s.latestGrading?.verdict?.code ?? null;
+    e.lastScore = score;
     e.best = Math.max(e.best, score);
     if (score >= 100 && !e.solvedAt) e.solvedAt = Math.round(s.time / 1000);
     byProblem.set(s.problemJid, e);
