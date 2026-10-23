@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-22T22:56:39.944Z",
+  "updatedAt": "2026-10-23T22:55:20.149Z",
   "failed": [],
   "contests": [
     {
@@ -7,7 +7,7 @@
       "id": "2277",
       "name": "Codeforces Round 1129 (Div. 2)",
       "start": 1792839900,
-      "duration": 7200,
+      "duration": 8100,
       "url": "https://codeforces.com/contests",
       "register": "https://codeforces.com/contestRegistration/2277",
       "tier": "tantangan"
