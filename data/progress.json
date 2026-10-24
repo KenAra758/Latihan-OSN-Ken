@@ -320,13 +320,29 @@
   },
   "atcoder": {
     "handle": "MarioKen",
-    "rating": null,
-    "ratedContests": 0,
-    "contests": 2,
+    "rating": 6,
+    "ratedContests": 1,
+    "contests": 3,
     "acCount": 89
   },
-  "updatedAt": "2026-10-14T00:30:08.007Z",
+  "updatedAt": "2026-10-24T14:40:56.733Z",
   "contestHistory": [
+    {
+      "platform": "AtCoder",
+      "id": "abc481",
+      "name": "SMBCプログラミングコンテスト #2（AtCoder Beginner Contest 481）",
+      "url": "https://atcoder.jp/contests/abc481",
+      "start": 1792843200,
+      "duration": 6000,
+      "participation": "resmi",
+      "rank": 8807,
+      "points": null,
+      "problems": [],
+      "rated": true,
+      "oldRating": 0,
+      "newRating": 6,
+      "performance": -98
+    },
     {
       "platform": "AtCoder",
       "id": "abc465",
