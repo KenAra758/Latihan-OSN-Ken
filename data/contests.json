@@ -1,26 +1,7 @@
 {
-  "updatedAt": "2026-10-23T22:55:20.149Z",
+  "updatedAt": "2026-10-24T22:50:39.309Z",
   "failed": [],
   "contests": [
-    {
-      "platform": "Codeforces",
-      "id": "2277",
-      "name": "Codeforces Round 1129 (Div. 2)",
-      "start": 1792839900,
-      "duration": 8100,
-      "url": "https://codeforces.com/contests",
-      "register": "https://codeforces.com/contestRegistration/2277",
-      "tier": "tantangan"
-    },
-    {
-      "platform": "AtCoder",
-      "name": "SMBC Programming Contest #2 (AtCoder Beginner Contest 481）",
-      "start": 1792843200,
-      "duration": 6000,
-      "url": "https://atcoder.jp/contests/abc481",
-      "register": null,
-      "tier": "cocok"
-    },
     {
       "platform": "AtCoder",
       "name": "AtCoder Regular Contest++ 233",
