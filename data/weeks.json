@@ -242,5 +242,132 @@
         "url": "https://tlx.toki.id/problems/osnp-2023/B1"
       }
     ]
+  },
+  {
+    "week": 3,
+    "start": "2026-10-26",
+    "end": "2026-11-01",
+    "deadline": 1793552400,
+    "level": {
+      "min": 800,
+      "max": 1400
+    },
+    "generatedAt": "2026-10-25T17:22:13.701Z",
+    "problems": [
+      {
+        "label": "A",
+        "contestId": 1691,
+        "index": "A",
+        "name": "Beat The Odds",
+        "rating": 800,
+        "tags": [
+          "brute force",
+          "greedy",
+          "math"
+        ]
+      },
+      {
+        "label": "B",
+        "contestId": 1883,
+        "index": "B",
+        "name": "Chemistry",
+        "rating": 900,
+        "tags": [
+          "strings"
+        ]
+      },
+      {
+        "label": "C",
+        "contestId": 2237,
+        "index": "B",
+        "name": "Annoying the Ghost",
+        "rating": 1000,
+        "tags": [
+          "brute force",
+          "greedy"
+        ],
+        "repeatFrom": 1,
+        "repeatCount": 1
+      },
+      {
+        "label": "D",
+        "contestId": 1523,
+        "index": "B",
+        "name": "Lord of the Values",
+        "rating": 1100,
+        "tags": [
+          "constructive algorithms"
+        ],
+        "repeatFrom": 1,
+        "repeatCount": 1
+      },
+      {
+        "label": "E",
+        "contestId": 1288,
+        "index": "B",
+        "name": "Yet Another Meme Problem",
+        "rating": 1100,
+        "tags": [
+          "math"
+        ]
+      },
+      {
+        "label": "F",
+        "contestId": 2172,
+        "index": "E",
+        "name": "Number Maze",
+        "rating": 1200,
+        "tags": [
+          "implementation"
+        ],
+        "repeatFrom": 1,
+        "repeatCount": 1
+      },
+      {
+        "label": "G",
+        "contestId": 1627,
+        "index": "B",
+        "name": "Not Sitting",
+        "rating": 1300,
+        "tags": [
+          "games",
+          "greedy",
+          "sortings"
+        ]
+      },
+      {
+        "label": "H",
+        "contestId": 1750,
+        "index": "C",
+        "name": "Complementary XOR",
+        "rating": 1400,
+        "tags": [
+          "constructive algorithms",
+          "implementation"
+        ]
+      }
+    ],
+    "bonus": [
+      {
+        "label": "Bonus 1",
+        "problemJid": "JIDPROGajDUmMsqhKsGDAVvdRdg",
+        "set": "OSN-P Informatika 2026",
+        "setSlug": "osnp-2026",
+        "alias": "A",
+        "name": "Kotak Telur",
+        "url": "https://tlx.toki.id/problems/osnp-2026/A",
+        "repeatFrom": 1,
+        "repeatCount": 1
+      },
+      {
+        "label": "Bonus 2",
+        "problemJid": "JIDPROGK6IbpgQC0BEiy9jtHA9M",
+        "set": "OSN-P Informatika 2022 - Bagian B",
+        "setSlug": "osnp-2022",
+        "alias": "B1",
+        "name": "Lampu Hias",
+        "url": "https://tlx.toki.id/problems/osnp-2022/B1"
+      }
+    ]
   }
 ]
