@@ -1,25 +1,7 @@
 {
-  "updatedAt": "2026-10-24T22:50:39.309Z",
+  "updatedAt": "2026-10-25T22:49:24.213Z",
   "failed": [],
   "contests": [
-    {
-      "platform": "AtCoder",
-      "name": "AtCoder Regular Contest++ 233",
-      "start": 1792929600,
-      "duration": 9000,
-      "url": "https://atcoder.jp/contests/arc233",
-      "register": null,
-      "tier": "tantangan"
-    },
-    {
-      "platform": "TLX TOKI",
-      "name": "Indonesia National Contest 2026 Mirror (Rated)",
-      "start": 1792933500,
-      "duration": 7200,
-      "url": "https://tlx.toki.id/contests/inc-2026-mirror",
-      "register": null,
-      "tier": "cocok"
-    },
     {
       "platform": "Codeforces",
       "id": "2272",
@@ -114,6 +96,15 @@
       "url": "https://atcoder.jp/contests/abc484",
       "register": null,
       "tier": "cocok"
+    },
+    {
+      "platform": "AtCoder",
+      "name": "AtCoder Regular Contest++ 234",
+      "start": 1795348800,
+      "duration": 9000,
+      "url": "https://atcoder.jp/contests/arc234",
+      "register": null,
+      "tier": "tantangan"
     }
   ]
 }
