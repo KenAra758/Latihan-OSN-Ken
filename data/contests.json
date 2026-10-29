@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-28T23:02:43.810Z",
+  "updatedAt": "2026-10-29T23:05:32.874Z",
   "failed": [],
   "contests": [
     {
@@ -116,6 +116,16 @@
       "url": "https://codeforces.com/contests",
       "register": "https://codeforces.com/contestRegistration/2285",
       "tier": "tantangan"
+    },
+    {
+      "platform": "Codeforces",
+      "id": "2286",
+      "name": "Kotlin Heroes: Practice 15",
+      "start": 1795185000,
+      "duration": 604800,
+      "url": "https://codeforces.com/contests",
+      "register": "https://codeforces.com/contestRegistration/2286",
+      "tier": "lanjut"
     },
     {
       "platform": "AtCoder",
