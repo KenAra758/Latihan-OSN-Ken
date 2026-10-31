@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-30T23:00:20.638Z",
+  "updatedAt": "2026-10-31T22:58:14.300Z",
   "failed": [],
   "contests": [
     {
@@ -12,25 +12,6 @@
       "tier": "lanjut"
     },
     {
-      "platform": "AtCoder",
-      "name": "AtCoder Beginner Contest 482",
-      "start": 1793448000,
-      "duration": 6000,
-      "url": "https://atcoder.jp/contests/abc482",
-      "register": null,
-      "tier": "cocok"
-    },
-    {
-      "platform": "Codeforces",
-      "id": "2278",
-      "name": "Codeforces Round 1131 (Div. 3)",
-      "start": 1793457300,
-      "duration": 8100,
-      "url": "https://codeforces.com/contests",
-      "register": "https://codeforces.com/contestRegistration/2278",
-      "tier": "cocok"
-    },
-    {
       "platform": "Codeforces",
       "id": "2283",
       "name": "Educational Codeforces Round 196 (Rated for Div. 2)",
@@ -39,16 +20,6 @@
       "url": "https://codeforces.com/contests",
       "register": "https://codeforces.com/contestRegistration/2283",
       "tier": "cocok"
-    },
-    {
-      "platform": "Codeforces",
-      "id": "2281",
-      "name": "ICPC 2026 Online Challenge 2 powered by Huawei",
-      "start": 1793876400,
-      "duration": 1209600,
-      "url": "https://codeforces.com/contests",
-      "register": "https://codeforces.com/contestRegistration/2281",
-      "tier": "lanjut"
     },
     {
       "platform": "Codeforces",
@@ -149,7 +120,7 @@
       "platform": "Codeforces",
       "id": "2282",
       "name": "Kotlin Heroes: Episode 15",
-      "start": 1795790100,
+      "start": 1796740500,
       "duration": 9000,
       "url": "https://codeforces.com/contests",
       "register": "https://codeforces.com/contestRegistration/2282",
