@@ -369,5 +369,139 @@
         "url": "https://tlx.toki.id/problems/osnp-2022/B1"
       }
     ]
+  },
+  {
+    "week": 4,
+    "start": "2026-11-02",
+    "end": "2026-11-08",
+    "deadline": 1794157200,
+    "level": {
+      "min": 800,
+      "max": 1400
+    },
+    "generatedAt": "2026-11-01T17:28:33.131Z",
+    "problems": [
+      {
+        "label": "A",
+        "contestId": 2072,
+        "index": "A",
+        "name": "New World, New Me, New Array",
+        "rating": 800,
+        "tags": [
+          "greedy",
+          "implementation",
+          "math"
+        ]
+      },
+      {
+        "label": "B",
+        "contestId": 1696,
+        "index": "B",
+        "name": "NIT Destroys the Universe",
+        "rating": 900,
+        "tags": [
+          "greedy"
+        ]
+      },
+      {
+        "label": "C",
+        "contestId": 1395,
+        "index": "A",
+        "name": "Boboniu Likes to Color Balls",
+        "rating": 1000,
+        "tags": [
+          "brute force",
+          "math"
+        ],
+        "repeatFrom": 2,
+        "repeatCount": 1
+      },
+      {
+        "label": "D",
+        "contestId": 2241,
+        "index": "B",
+        "name": "Good times Good times",
+        "rating": 1100,
+        "tags": [
+          "constructive algorithms",
+          "dfs and similar",
+          "math"
+        ]
+      },
+      {
+        "label": "E",
+        "contestId": 1899,
+        "index": "B",
+        "name": "250 Thousand Tons of TNT",
+        "rating": 1100,
+        "tags": [
+          "brute force",
+          "implementation",
+          "number theory"
+        ]
+      },
+      {
+        "label": "F",
+        "contestId": 1097,
+        "index": "B",
+        "name": "Petr and a Combination Lock",
+        "rating": 1200,
+        "tags": [
+          "bitmasks",
+          "brute force",
+          "dp"
+        ]
+      },
+      {
+        "label": "G",
+        "contestId": 1676,
+        "index": "G",
+        "name": "White-Black Balanced Subtrees",
+        "rating": 1300,
+        "tags": [
+          "dfs and similar",
+          "dp",
+          "graphs",
+          "trees"
+        ],
+        "repeatFrom": 1,
+        "repeatCount": 1
+      },
+      {
+        "label": "H",
+        "contestId": 2172,
+        "index": "M",
+        "name": "Maximum Distance To Port",
+        "rating": 1400,
+        "tags": [
+          "graphs",
+          "shortest paths"
+        ],
+        "repeatFrom": 1,
+        "repeatCount": 1
+      }
+    ],
+    "bonus": [
+      {
+        "label": "Bonus 1",
+        "problemJid": "JIDPROG3kmEh83Sqo6Xwd1NVIdZ",
+        "set": "OSN-P Informatika 2025",
+        "setSlug": "osnp-2025",
+        "alias": "A",
+        "name": "String Cantik OSN-P",
+        "url": "https://tlx.toki.id/problems/osnp-2025/A",
+        "repeatFrom": 1,
+        "repeatCount": 1
+      },
+      {
+        "label": "Bonus 2",
+        "problemJid": "JIDPROGyCOWcTmWjp1OzEMKDtXJ",
+        "set": "KSN-P Informatika 2021 - Bagian B",
+        "setSlug": "ksnp-2021",
+        "alias": "B1",
+        "name": "Buah",
+        "url": "https://tlx.toki.id/problems/ksnp-2021/B1"
+      }
+    ]
   }
 ]
