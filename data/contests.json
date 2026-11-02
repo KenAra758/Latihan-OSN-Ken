@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-01T22:59:01.530Z",
+  "updatedAt": "2026-11-02T23:04:50.605Z",
   "failed": [],
   "contests": [
     {
@@ -70,6 +70,15 @@
       "tier": "lanjut"
     },
     {
+      "platform": "TLX TOKI",
+      "name": "TLX Regular Open Contest #44",
+      "start": 1794229500,
+      "duration": 9000,
+      "url": "https://tlx.toki.id/contests/troc-44",
+      "register": null,
+      "tier": "cocok"
+    },
+    {
       "platform": "AtCoder",
       "name": "AtCoder Beginner Contest 484",
       "start": 1794657600,
@@ -105,6 +114,15 @@
       "url": "https://atcoder.jp/contests/arc234",
       "register": null,
       "tier": "tantangan"
+    },
+    {
+      "platform": "AtCoder",
+      "name": "AtCoder Beginner Contest 486",
+      "start": 1795867200,
+      "duration": 6000,
+      "url": "https://atcoder.jp/contests/abc486",
+      "register": null,
+      "tier": "cocok"
     },
     {
       "platform": "Codeforces",
