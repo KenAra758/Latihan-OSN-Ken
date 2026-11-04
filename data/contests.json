@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-03T23:12:06.930Z",
+  "updatedAt": "2026-11-04T23:10:25.638Z",
   "failed": [],
   "contests": [
     {
@@ -13,18 +13,8 @@
     },
     {
       "platform": "Codeforces",
-      "id": "2283",
-      "name": "Educational Codeforces Round 196 (Rated for Div. 2)",
-      "start": 1793802900,
-      "duration": 7200,
-      "url": "https://codeforces.com/contests",
-      "register": "https://codeforces.com/contestRegistration/2283",
-      "tier": "cocok"
-    },
-    {
-      "platform": "Codeforces",
       "id": "2284",
-      "name": "Codeforces Round (Div. 2)",
+      "name": "Codeforces Round 1132 (Div. 2)",
       "start": 1793975700,
       "duration": 8100,
       "url": "https://codeforces.com/contests",
@@ -43,7 +33,7 @@
     {
       "platform": "Codeforces",
       "id": "2279",
-      "name": "Codeforces Round (Div. 1)",
+      "name": "Codeforces Round 1133 (Div. 1)",
       "start": 1794062100,
       "duration": 9000,
       "url": "https://codeforces.com/contests",
@@ -53,7 +43,7 @@
     {
       "platform": "Codeforces",
       "id": "2280",
-      "name": "Codeforces Round (Div. 2)",
+      "name": "Codeforces Round 1133 (Div. 2)",
       "start": 1794062100,
       "duration": 9000,
       "url": "https://codeforces.com/contests",
@@ -162,6 +152,15 @@
       "duration": 9000,
       "url": "https://codeforces.com/contests",
       "register": "https://codeforces.com/contestRegistration/2282",
+      "tier": "lanjut"
+    },
+    {
+      "platform": "AtCoder",
+      "name": "AtCoder Grand Contest 080",
+      "start": 1797163200,
+      "duration": 10800,
+      "url": "https://atcoder.jp/contests/agc080",
+      "register": null,
       "tier": "lanjut"
     }
   ]
