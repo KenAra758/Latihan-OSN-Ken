@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-05T23:10:27.192Z",
+  "updatedAt": "2026-11-06T23:07:42.768Z",
   "failed": [],
   "contests": [
     {
@@ -10,16 +10,6 @@
       "url": "https://atcoder.jp/contests/ahc074",
       "register": null,
       "tier": "lanjut"
-    },
-    {
-      "platform": "Codeforces",
-      "id": "2284",
-      "name": "Codeforces Round 1132 (Div. 2)",
-      "start": 1793975700,
-      "duration": 8100,
-      "url": "https://codeforces.com/contests",
-      "register": "https://codeforces.com/contestRegistration/2284",
-      "tier": "tantangan"
     },
     {
       "platform": "AtCoder",
