@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-06T23:07:42.768Z",
+  "updatedAt": "2026-11-07T23:00:04.911Z",
   "failed": [],
   "contests": [
     {
@@ -10,35 +10,6 @@
       "url": "https://atcoder.jp/contests/ahc074",
       "register": null,
       "tier": "lanjut"
-    },
-    {
-      "platform": "AtCoder",
-      "name": "AtCoder Beginner Contest 483",
-      "start": 1794052800,
-      "duration": 6000,
-      "url": "https://atcoder.jp/contests/abc483",
-      "register": null,
-      "tier": "cocok"
-    },
-    {
-      "platform": "Codeforces",
-      "id": "2279",
-      "name": "Codeforces Round 1133 (Div. 1)",
-      "start": 1794062100,
-      "duration": 9000,
-      "url": "https://codeforces.com/contests",
-      "register": "https://codeforces.com/contestRegistration/2279",
-      "tier": "lanjut"
-    },
-    {
-      "platform": "Codeforces",
-      "id": "2280",
-      "name": "Codeforces Round 1133 (Div. 2)",
-      "start": 1794062100,
-      "duration": 9000,
-      "url": "https://codeforces.com/contests",
-      "register": "https://codeforces.com/contestRegistration/2280",
-      "tier": "tantangan"
     },
     {
       "platform": "AtCoder",
@@ -56,6 +27,16 @@
       "duration": 9000,
       "url": "https://tlx.toki.id/contests/troc-44",
       "register": null,
+      "tier": "cocok"
+    },
+    {
+      "platform": "Codeforces",
+      "id": "2290",
+      "name": "Codeforces Round 1134 (Div. 4)",
+      "start": 1794494100,
+      "duration": 8100,
+      "url": "https://codeforces.com/contests",
+      "register": "https://codeforces.com/contestRegistration/2290",
       "tier": "cocok"
     },
     {
