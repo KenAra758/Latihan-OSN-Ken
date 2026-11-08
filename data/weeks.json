@@ -503,5 +503,136 @@
         "url": "https://tlx.toki.id/problems/ksnp-2021/B1"
       }
     ]
+  },
+  {
+    "week": 5,
+    "start": "2026-11-09",
+    "end": "2026-11-15",
+    "deadline": 1794762000,
+    "level": {
+      "min": 800,
+      "max": 1400
+    },
+    "generatedAt": "2026-11-08T17:29:37.463Z",
+    "problems": [
+      {
+        "label": "A",
+        "contestId": 1369,
+        "index": "A",
+        "name": "FashionabLee",
+        "rating": 800,
+        "tags": [
+          "geometry",
+          "math"
+        ]
+      },
+      {
+        "label": "B",
+        "contestId": 1406,
+        "index": "A",
+        "name": "Subset Mex",
+        "rating": 900,
+        "tags": [
+          "greedy",
+          "implementation",
+          "math"
+        ]
+      },
+      {
+        "label": "C",
+        "contestId": 1906,
+        "index": "A",
+        "name": "Easy As ABC",
+        "rating": 1000,
+        "tags": [
+          "brute force"
+        ]
+      },
+      {
+        "label": "D",
+        "contestId": 1365,
+        "index": "A",
+        "name": "Matrix Game",
+        "rating": 1100,
+        "tags": [
+          "games",
+          "greedy",
+          "implementation"
+        ],
+        "repeatFrom": 2,
+        "repeatCount": 1
+      },
+      {
+        "label": "E",
+        "contestId": 2193,
+        "index": "D",
+        "name": "Monster Game",
+        "rating": 1100,
+        "tags": [
+          "binary search",
+          "sortings",
+          "two pointers"
+        ],
+        "repeatFrom": 2,
+        "repeatCount": 1
+      },
+      {
+        "label": "F",
+        "contestId": 1559,
+        "index": "C",
+        "name": "Mocha and Hiking",
+        "rating": 1200,
+        "tags": [
+          "constructive algorithms",
+          "graphs"
+        ],
+        "repeatFrom": 2,
+        "repeatCount": 1
+      },
+      {
+        "label": "G",
+        "contestId": 1225,
+        "index": "B2",
+        "name": "TV Subscriptions (Hard Version)",
+        "rating": 1300,
+        "tags": [
+          "implementation",
+          "two pointers"
+        ]
+      },
+      {
+        "label": "H",
+        "contestId": 1606,
+        "index": "C",
+        "name": "Banknotes",
+        "rating": 1400,
+        "tags": [
+          "greedy",
+          "number theory"
+        ]
+      }
+    ],
+    "bonus": [
+      {
+        "label": "Bonus 1",
+        "problemJid": "JIDPROGCjhRHGJZ8vdNZXqvK5dQ",
+        "set": "OSN-P Informatika 2024",
+        "setSlug": "osnp-2024",
+        "alias": "A",
+        "name": "String Cantik OSN",
+        "url": "https://tlx.toki.id/problems/osnp-2024/A",
+        "repeatFrom": 2,
+        "repeatCount": 1
+      },
+      {
+        "label": "Bonus 2",
+        "problemJid": "JIDPROGFJQradz8u57kUZrw4wf2",
+        "set": "OSN-P Informatika 2026",
+        "setSlug": "osnp-2026",
+        "alias": "B",
+        "name": "Lagi-Lagi Berbagi Candil",
+        "url": "https://tlx.toki.id/problems/osnp-2026/B"
+      }
+    ]
   }
 ]
