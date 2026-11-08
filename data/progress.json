@@ -1,7 +1,7 @@
 {
   "tlx": {
     "username": "MarioKen",
-    "totalSubmissions": 415,
+    "totalSubmissions": 416,
     "problems": {},
     "courses": [
       {
@@ -246,11 +246,11 @@
             "alias": "08",
             "name": "Struktur Data Dasar",
             "total": 5,
-            "solved": 2,
+            "solved": 3,
             "attempted": 3,
-            "submissions": 14,
+            "submissions": 15,
             "firstAt": 1789289300,
-            "lastAt": 1794126106,
+            "lastAt": 1794129432,
             "doneAt": null,
             "activeDays": 4
           },
@@ -325,7 +325,7 @@
     "contests": 3,
     "acCount": 90
   },
-  "updatedAt": "2026-11-08T08:58:41.871Z",
+  "updatedAt": "2026-11-08T10:52:12.038Z",
   "contestHistory": [
     {
       "platform": "AtCoder",
