@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-07T23:00:04.911Z",
+  "updatedAt": "2026-11-08T23:00:30.615Z",
   "failed": [],
   "contests": [
     {
@@ -8,15 +8,6 @@
       "start": 1793354400,
       "duration": 864000,
       "url": "https://atcoder.jp/contests/ahc074",
-      "register": null,
-      "tier": "lanjut"
-    },
-    {
-      "platform": "AtCoder",
-      "name": "AtCoder Grand Contest 079",
-      "start": 1794139200,
-      "duration": 12600,
-      "url": "https://atcoder.jp/contests/agc079",
       "register": null,
       "tier": "lanjut"
     },
