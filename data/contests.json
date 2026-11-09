@@ -1,25 +1,7 @@
 {
-  "updatedAt": "2026-11-08T23:00:30.615Z",
+  "updatedAt": "2026-11-09T23:10:28.317Z",
   "failed": [],
   "contests": [
-    {
-      "platform": "AtCoder",
-      "name": "HACK TO THE FUTURE 2027 (AtCoder Heuristic Contest 074)",
-      "start": 1793354400,
-      "duration": 864000,
-      "url": "https://atcoder.jp/contests/ahc074",
-      "register": null,
-      "tier": "lanjut"
-    },
-    {
-      "platform": "TLX TOKI",
-      "name": "TLX Regular Open Contest #44",
-      "start": 1794229500,
-      "duration": 9000,
-      "url": "https://tlx.toki.id/contests/troc-44",
-      "register": null,
-      "tier": "cocok"
-    },
     {
       "platform": "Codeforces",
       "id": "2290",
