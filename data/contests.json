@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-10T23:06:06.632Z",
+  "updatedAt": "2026-11-11T23:16:47.676Z",
   "failed": [],
   "contests": [
     {
@@ -62,12 +62,12 @@
     },
     {
       "platform": "AtCoder",
-      "name": "AtCoder Grand Contest 080",
+      "name": "AtCoder Regular Contest++ 234",
       "start": 1795348800,
-      "duration": 10800,
-      "url": "https://atcoder.jp/contests/agc080",
+      "duration": 9000,
+      "url": "https://atcoder.jp/contests/arc234",
       "register": null,
-      "tier": "lanjut"
+      "tier": "tantangan"
     },
     {
       "platform": "AtCoder",
@@ -109,10 +109,10 @@
     },
     {
       "platform": "AtCoder",
-      "name": "AtCoder Grand Contest 081",
+      "name": "AtCoder Grand Contest 080",
       "start": 1797163200,
       "duration": 10800,
-      "url": "https://atcoder.jp/contests/agc081",
+      "url": "https://atcoder.jp/contests/agc080",
       "register": null,
       "tier": "lanjut"
     }
