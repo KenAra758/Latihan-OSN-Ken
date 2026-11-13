@@ -1,17 +1,7 @@
 {
-  "updatedAt": "2026-11-11T23:16:47.676Z",
+  "updatedAt": "2026-11-13T02:45:43.615Z",
   "failed": [],
   "contests": [
-    {
-      "platform": "Codeforces",
-      "id": "2290",
-      "name": "Codeforces Round 1134 (Div. 4)",
-      "start": 1794494100,
-      "duration": 8100,
-      "url": "https://codeforces.com/contests",
-      "register": "https://codeforces.com/contestRegistration/2290",
-      "tier": "cocok"
-    },
     {
       "platform": "AtCoder",
       "name": "AtCoder Beginner Contest 484",
@@ -24,7 +14,7 @@
     {
       "platform": "Codeforces",
       "id": "2285",
-      "name": "Codeforces Round (Div. 2)",
+      "name": "Codeforces Round 1135 (Div. 2)",
       "start": 1794753300,
       "duration": 7200,
       "url": "https://codeforces.com/contests",
@@ -79,6 +69,15 @@
       "tier": "cocok"
     },
     {
+      "platform": "AtCoder",
+      "name": "AtCoder Heuristic Contest 075",
+      "start": 1795946400,
+      "duration": 14400,
+      "url": "https://atcoder.jp/contests/ahc075",
+      "register": null,
+      "tier": "lanjut"
+    },
+    {
       "platform": "Codeforces",
       "id": "2286",
       "name": "Kotlin Heroes: Practice 15",
@@ -113,6 +112,15 @@
       "start": 1797163200,
       "duration": 10800,
       "url": "https://atcoder.jp/contests/agc080",
+      "register": null,
+      "tier": "lanjut"
+    },
+    {
+      "platform": "AtCoder",
+      "name": "AtCoder Grand Contest 081",
+      "start": 1798372800,
+      "duration": 10800,
+      "url": "https://atcoder.jp/contests/agc081",
       "register": null,
       "tier": "lanjut"
     }
