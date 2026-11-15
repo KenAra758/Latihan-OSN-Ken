@@ -1,16 +1,7 @@
 {
-  "updatedAt": "2026-11-14T02:35:10.143Z",
+  "updatedAt": "2026-11-15T02:02:01.325Z",
   "failed": [],
   "contests": [
-    {
-      "platform": "AtCoder",
-      "name": "AtCoder Beginner Contest 484",
-      "start": 1794657600,
-      "duration": 6000,
-      "url": "https://atcoder.jp/contests/abc484",
-      "register": null,
-      "tier": "cocok"
-    },
     {
       "platform": "Codeforces",
       "id": "2285",
@@ -48,6 +39,16 @@
       "duration": 7200,
       "url": "https://codeforces.com/contests",
       "register": "https://codeforces.com/contestRegistration/2288",
+      "tier": "tantangan"
+    },
+    {
+      "platform": "Codeforces",
+      "id": "2289",
+      "name": "Codeforces Round (Div. 2)",
+      "start": 1795338300,
+      "duration": 7200,
+      "url": "https://codeforces.com/contests",
+      "register": "https://codeforces.com/contestRegistration/2289",
       "tier": "tantangan"
     },
     {
