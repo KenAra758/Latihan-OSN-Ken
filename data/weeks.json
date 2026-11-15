@@ -634,5 +634,134 @@
         "url": "https://tlx.toki.id/problems/osnp-2026/B"
       }
     ]
+  },
+  {
+    "week": 6,
+    "start": "2026-11-16",
+    "end": "2026-11-22",
+    "deadline": 1795366800,
+    "level": {
+      "min": 800,
+      "max": 1400
+    },
+    "generatedAt": "2026-11-15T17:31:32.430Z",
+    "problems": [
+      {
+        "label": "A",
+        "contestId": 1913,
+        "index": "A",
+        "name": "Rating Increase",
+        "rating": 800,
+        "tags": [
+          "implementation"
+        ]
+      },
+      {
+        "label": "B",
+        "contestId": 1828,
+        "index": "B",
+        "name": "Permutation Swap",
+        "rating": 900,
+        "tags": [
+          "math",
+          "number theory"
+        ]
+      },
+      {
+        "label": "C",
+        "contestId": 2237,
+        "index": "B",
+        "name": "Annoying the Ghost",
+        "rating": 1000,
+        "tags": [
+          "brute force",
+          "greedy"
+        ],
+        "repeatFrom": 1,
+        "repeatCount": 2
+      },
+      {
+        "label": "D",
+        "contestId": 1523,
+        "index": "B",
+        "name": "Lord of the Values",
+        "rating": 1100,
+        "tags": [
+          "constructive algorithms"
+        ],
+        "repeatFrom": 1,
+        "repeatCount": 2
+      },
+      {
+        "label": "E",
+        "contestId": 1807,
+        "index": "G1",
+        "name": "Subsequence Addition (Easy Version)",
+        "rating": 1100,
+        "tags": [
+          "brute force",
+          "data structures",
+          "dp",
+          "greedy",
+          "implementation",
+          "sortings"
+        ]
+      },
+      {
+        "label": "F",
+        "contestId": 1130,
+        "index": "B",
+        "name": "Two Cakes",
+        "rating": 1200,
+        "tags": [
+          "greedy"
+        ]
+      },
+      {
+        "label": "G",
+        "contestId": 2195,
+        "index": "D",
+        "name": "Absolute Cinema",
+        "rating": 1300,
+        "tags": [
+          "math"
+        ]
+      },
+      {
+        "label": "H",
+        "contestId": 1974,
+        "index": "C",
+        "name": "Beautiful Triple Pairs",
+        "rating": 1400,
+        "tags": [
+          "combinatorics",
+          "data structures"
+        ],
+        "repeatFrom": 2,
+        "repeatCount": 1
+      }
+    ],
+    "bonus": [
+      {
+        "label": "Bonus 1",
+        "problemJid": "JIDPROGsQKMbeXV4MiF0M6x6Clw",
+        "set": "OSN-P Informatika 2023 - Bagian B",
+        "setSlug": "osnp-2023",
+        "alias": "B1",
+        "name": "Menjual Kentang",
+        "url": "https://tlx.toki.id/problems/osnp-2023/B1",
+        "repeatFrom": 2,
+        "repeatCount": 1
+      },
+      {
+        "label": "Bonus 2",
+        "problemJid": "JIDPROGeTuELhZJtIYZHfzYWHG9",
+        "set": "OSN-P Informatika 2025",
+        "setSlug": "osnp-2025",
+        "alias": "B",
+        "name": "Gudang Penyimpanan Kardus",
+        "url": "https://tlx.toki.id/problems/osnp-2025/B"
+      }
+    ]
   }
 ]
