@@ -119,6 +119,28 @@
           <ul class="tag-bars" id="rating-bars"></ul>
         </figure>
       </div>
+      <figure class="chart-card care-card">
+        <figcaption>Indikator ketelitian</figcaption>
+        <p class="muted small care-intro">Dihitung dari <strong>semua</strong> submit Ken di Codeforces per minggu (Senin–Minggu). <strong>Gagal kompilasi (CE)</strong> dan <strong>salah di test 1</strong> hampir selalu bisa dicegah dengan mengompilasi dan mencoba contoh soal di laptop sebelum submit.</p>
+        <div id="care-summary" class="care-summary"></div>
+        <div class="table-scroll care-scroll">
+          <table class="history care-table">
+            <thead><tr><th>Minggu</th><th class="num">Submit</th><th class="num">CE</th><th class="num">WA test 1</th><th class="num">Ceroboh</th><th class="num">AC langsung</th></tr></thead>
+            <tbody id="care-body"></tbody>
+          </table>
+        </div>
+        <details class="care-check">
+          <summary>Checklist sebelum submit</summary>
+          <ol>
+            <li>Baca ulang soal, terutama format input/output dan ada tidaknya banyak test case (<code>t</code>).</li>
+            <li>Kompilasi di laptop dulu. Jangan submit kode yang belum dikompilasi.</li>
+            <li>Jalankan <strong>semua</strong> contoh soal dan pastikan keluarannya sama persis.</li>
+            <li>Cek batas angka: kalau hasil bisa melebihi ±2 miliar, pakai <code>long long</code>.</li>
+            <li>Coba 1–2 kasus tepi sendiri (n = 1, semua angka sama, angka maksimum).</li>
+            <li>Pastikan bahasa yang dipilih di Codeforces adalah <strong>C++</strong> (bukan C).</li>
+          </ol>
+        </details>
+      </figure>
     </section>
 
     <!-- TOPIK -->

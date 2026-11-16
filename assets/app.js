@@ -533,6 +533,110 @@
       <span class="name rating ${rankClass(r)}">${r}</span>
       <span class="track"><span class="fill" style="width:${(d / t) * 100}%"></span></span>
       <span class="val">${d}/${t}</span></li>`).join('') : '<li class="muted">Belum ada data.</li>';
+
+    renderCarefulness();
+  }
+
+  // ---------- Render: indikator ketelitian ----------
+  // Senin 00:00 WIB (detik UTC) dari minggu yang memuat waktu `sec`.
+  function mondayWib(sec) {
+    const off = 7 * 3600;
+    const day = Math.floor((sec + off) / 86400);
+    const dow = (new Date(day * 86400000).getUTCDay() + 6) % 7; // 0 = Senin
+    return (day - dow) * 86400 - off;
+  }
+
+  function carefulnessWeeks(count) {
+    const subs = state.subs.filter((s) => s.verdict && s.verdict !== 'TESTING' && s.problem);
+    // Submit pertama untuk tiap soal: apakah langsung AC?
+    const first = new Map();
+    [...subs].sort((a, b) => a.creationTimeSeconds - b.creationTimeSeconds).forEach((s) => {
+      const k = keyOf(s.problem);
+      if (!first.has(k)) first.set(k, s);
+    });
+    const thisMon = mondayWib(Math.floor(Date.now() / 1000));
+    const rows = [];
+    for (let i = 0; i < count; i++) {
+      const start = thisMon - i * 7 * 86400;
+      rows.push({ start, end: start + 7 * 86400, submits: 0, ce: 0, wa1: 0, notCpp: 0, firstTried: 0, firstAc: 0 });
+    }
+    const rowOf = (t) => rows.find((r) => t >= r.start && t < r.end);
+    subs.forEach((s) => {
+      const r = rowOf(s.creationTimeSeconds);
+      if (!r) return;
+      r.submits++;
+      if (s.verdict === 'COMPILATION_ERROR') r.ce++;
+      if (s.verdict === 'WRONG_ANSWER' && s.passedTestCount === 0) r.wa1++;
+      if (!/C\+\+/i.test(s.programmingLanguage || '')) r.notCpp++;
+    });
+    first.forEach((s) => {
+      const r = rowOf(s.creationTimeSeconds);
+      if (!r) return;
+      r.firstTried++;
+      if (s.verdict === 'OK') r.firstAc++;
+    });
+    rows.forEach((r) => { r.careless = r.submits ? (r.ce + r.wa1) / r.submits : null; });
+    return rows;
+  }
+
+  const pct = (x) => `${Math.round(x * 100)}%`;
+  const carelessClass = (x) => (x == null ? '' : x <= 0.15 ? 'care-good' : x <= 0.3 ? 'care-mid' : 'care-bad');
+
+  function renderCarefulness() {
+    const body = $('care-body');
+    if (!body) return;
+    if (!state.subs.length) {
+      $('care-summary').innerHTML = '';
+      body.innerHTML = '<tr><td colspan="6" class="empty">Data submit Codeforces belum terbaca.</td></tr>';
+      return;
+    }
+    const rows = carefulnessWeeks(9);
+    const programWeek = (r) => state.weeks.find((w) => {
+      const t = Date.parse(w.start + 'T00:00:00+07:00') / 1000;
+      return t === r.start;
+    });
+
+    body.innerHTML = rows.slice(0, 8).map((r, i) => {
+      const pw = programWeek(r);
+      const range = `${fmtDate(r.start, { day: 'numeric', month: 'short' })} – ${fmtDate(r.end - 1, { day: 'numeric', month: 'short' })}`;
+      const label = `${i === 0 ? '<strong>Minggu ini</strong> · ' : ''}${pw ? `M${pw.week} · ` : ''}${range}`;
+      if (!r.submits) return `<tr><td>${label}</td><td class="num muted" colspan="5">tidak ada submit</td></tr>`;
+      const warnLang = r.notCpp ? ` <span class="care-lang" title="Submit dengan bahasa selain C++">${r.notCpp}× bukan C++</span>` : '';
+      return `<tr>
+        <td>${label}${warnLang}</td>
+        <td class="num">${r.submits}</td>
+        <td class="num">${r.ce || '–'}</td>
+        <td class="num">${r.wa1 || '–'}</td>
+        <td class="num"><span class="care-pill ${carelessClass(r.careless)}">${pct(r.careless)}</span></td>
+        <td class="num">${r.firstTried ? `${r.firstAc}/${r.firstTried}` : '–'}</td>
+      </tr>`;
+    }).join('');
+
+    // Ringkasan: minggu ini (atau minggu terakhir yang ada submitnya) dibanding 4 minggu sebelumnya.
+    let ci = rows.findIndex((r) => r.submits);
+    if (ci < 0) ci = 0;
+    const now = rows[ci];
+    const when = ci === 0 ? 'minggu ini' : ci === 1 ? 'minggu lalu' : `minggu ${fmtDate(now.start, { day: 'numeric', month: 'short' })}`;
+    const prev = rows.slice(ci + 1, ci + 5).filter((r) => r.submits);
+    const sum = (arr, k) => arr.reduce((n, r) => n + r[k], 0);
+    const prevRate = prev.length ? (sum(prev, 'ce') + sum(prev, 'wa1')) / sum(prev, 'submits') : null;
+    const prevFirst = sum(prev, 'firstTried') ? sum(prev, 'firstAc') / sum(prev, 'firstTried') : null;
+    let trend = '';
+    if (now.careless != null && prevRate != null) {
+      const diff = now.careless - prevRate;
+      trend = Math.abs(diff) < 0.03
+        ? '<span class="muted">sama seperti biasanya</span>'
+        : diff < 0
+          ? `<span class="care-better">▼ lebih teliti dari biasanya (${pct(prevRate)})</span>`
+          : `<span class="care-worse">▲ lebih ceroboh dari biasanya (${pct(prevRate)})</span>`;
+    }
+    const tiles = [
+      [now.careless != null ? pct(now.careless) : '–', `submit ceroboh ${when}${trend ? `<br>${trend}` : ''}`, carelessClass(now.careless)],
+      [now.ce + now.wa1, `CE + WA test 1 ${when}`, ''],
+      [now.firstTried ? `${now.firstAc}/${now.firstTried}` : '–',
+        `soal baru langsung AC${prevFirst != null ? ` <span class="muted">(biasanya ${pct(prevFirst)})</span>` : ''}`, ''],
+    ];
+    $('care-summary').innerHTML = tiles.map(([v, l, c]) => `<div class="tile"><b class="${c}">${v}</b><span>${l}</span></div>`).join('');
   }
 
   function bars(ul, entries, emptyText) {

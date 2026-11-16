@@ -214,6 +214,28 @@ a.chip { text-decoration: none; color: inherit; }
 .tag-bars .fill { height: 100%; background: var(--accent); border-radius: 99px; }
 .tag-bars .val { font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--muted); }
 
+/* Ketelitian */
+.care-card { display: grid; gap: 12px; }
+.care-card figcaption { margin-bottom: 0; }
+.care-intro { margin: 0; max-width: 75ch; }
+.care-summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 640px) { .care-summary { grid-template-columns: 1fr; } }
+.care-summary .tile { background: var(--bg); }
+.care-scroll { border-radius: 10px; }
+.care-table { font-size: 14px; }
+.care-table th, .care-table td { padding: 9px 12px; }
+.care-table thead th.num { text-align: right; }
+.care-pill { display: inline-block; min-width: 3.2em; text-align: center; padding: 1px 8px; border-radius: 99px; font-weight: 700; }
+.care-pill.care-good { background: var(--ok-soft); color: var(--ok); }
+.care-pill.care-mid { background: var(--late-soft); color: var(--late); }
+.care-pill.care-bad { color: var(--bad); background: color-mix(in srgb, var(--bad) 14%, transparent); }
+.tile b.care-good { color: var(--ok); } .tile b.care-mid { color: var(--late); } .tile b.care-bad { color: var(--bad); }
+.care-better { color: var(--ok); font-weight: 600; }
+.care-worse { color: var(--bad); font-weight: 600; }
+.care-lang { font-size: 12px; color: var(--bad); margin-left: 6px; }
+.care-check summary { cursor: pointer; font-weight: 600; color: var(--accent); }
+.care-check ol { margin: 8px 0 0; padding-left: 1.4em; display: grid; gap: 4px; font-size: 14px; }
+
 /* Contests */
 .small { font-size: 13px; }
 .nc-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
