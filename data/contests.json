@@ -1,17 +1,7 @@
 {
-  "updatedAt": "2026-11-15T02:02:01.325Z",
+  "updatedAt": "2026-11-16T02:18:44.544Z",
   "failed": [],
   "contests": [
-    {
-      "platform": "Codeforces",
-      "id": "2285",
-      "name": "Codeforces Round 1135 (Div. 2)",
-      "start": 1794753300,
-      "duration": 7200,
-      "url": "https://codeforces.com/contests",
-      "register": "https://codeforces.com/contestRegistration/2285",
-      "tier": "tantangan"
-    },
     {
       "platform": "AtCoder",
       "name": "AtCoder Beginner Contest 485",
