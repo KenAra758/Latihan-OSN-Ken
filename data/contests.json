@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-18T03:46:06.435Z",
+  "updatedAt": "2026-11-19T03:44:47.275Z",
   "failed": [],
   "contests": [
     {
@@ -14,7 +14,7 @@
     {
       "platform": "Codeforces",
       "id": "2287",
-      "name": "Codeforces Round (Div. 1)",
+      "name": "Codeforces Round 1136 (Div. 1)",
       "start": 1795271700,
       "duration": 7200,
       "url": "https://codeforces.com/contests",
@@ -24,7 +24,7 @@
     {
       "platform": "Codeforces",
       "id": "2288",
-      "name": "Codeforces Round (Div. 2)",
+      "name": "Codeforces Round 1136 (Div. 2)",
       "start": 1795271700,
       "duration": 7200,
       "url": "https://codeforces.com/contests",
@@ -34,7 +34,7 @@
     {
       "platform": "Codeforces",
       "id": "2289",
-      "name": "Codeforces Round (Div. 2)",
+      "name": "Codeforces Round 1137 (Div. 2)",
       "start": 1795338300,
       "duration": 7200,
       "url": "https://codeforces.com/contests",
@@ -96,6 +96,15 @@
       "url": "https://codeforces.com/contests",
       "register": "https://codeforces.com/contestRegistration/2282",
       "tier": "lanjut"
+    },
+    {
+      "platform": "AtCoder",
+      "name": "AtCoder Beginner Contest 488",
+      "start": 1797076800,
+      "duration": 6000,
+      "url": "https://atcoder.jp/contests/abc488",
+      "register": null,
+      "tier": "cocok"
     },
     {
       "platform": "AtCoder",
