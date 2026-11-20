@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-19T03:44:47.275Z",
+  "updatedAt": "2026-11-20T03:38:25.481Z",
   "failed": [],
   "contests": [
     {
@@ -114,6 +114,15 @@
       "url": "https://atcoder.jp/contests/agc080",
       "register": null,
       "tier": "lanjut"
+    },
+    {
+      "platform": "AtCoder",
+      "name": "UNIQUE VISION Programming Contest 2026 (ChristmasAtCoder Beginner Contest 489)",
+      "start": 1797768000,
+      "duration": 6000,
+      "url": "https://atcoder.jp/contests/abc489",
+      "register": null,
+      "tier": "cocok"
     },
     {
       "platform": "AtCoder",
