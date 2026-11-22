@@ -763,5 +763,132 @@
         "url": "https://tlx.toki.id/problems/osnp-2025/B"
       }
     ]
+  },
+  {
+    "week": 7,
+    "start": "2026-11-23",
+    "end": "2026-11-29",
+    "deadline": 1795971600,
+    "level": {
+      "min": 800,
+      "max": 1400
+    },
+    "generatedAt": "2026-11-22T22:21:31.624Z",
+    "problems": [
+      {
+        "label": "A",
+        "contestId": 2030,
+        "index": "A",
+        "name": "A Gift From Orangutan",
+        "rating": 800,
+        "tags": [
+          "constructive algorithms",
+          "greedy",
+          "math",
+          "sortings"
+        ]
+      },
+      {
+        "label": "B",
+        "contestId": 1883,
+        "index": "B",
+        "name": "Chemistry",
+        "rating": 900,
+        "tags": [
+          "strings"
+        ],
+        "repeatFrom": 3,
+        "repeatCount": 1
+      },
+      {
+        "label": "C",
+        "contestId": 1851,
+        "index": "C",
+        "name": "Tiles Comeback",
+        "rating": 1000,
+        "tags": [
+          "greedy"
+        ]
+      },
+      {
+        "label": "D",
+        "contestId": 1496,
+        "index": "B",
+        "name": "Max and Mex",
+        "rating": 1100,
+        "tags": [
+          "math"
+        ]
+      },
+      {
+        "label": "E",
+        "contestId": 1873,
+        "index": "E",
+        "name": "Building an Aquarium",
+        "rating": 1100,
+        "tags": [
+          "binary search",
+          "sortings"
+        ]
+      },
+      {
+        "label": "F",
+        "contestId": 2172,
+        "index": "E",
+        "name": "Number Maze",
+        "rating": 1200,
+        "tags": [
+          "implementation"
+        ],
+        "repeatFrom": 1,
+        "repeatCount": 2
+      },
+      {
+        "label": "G",
+        "contestId": 1627,
+        "index": "B",
+        "name": "Not Sitting",
+        "rating": 1300,
+        "tags": [
+          "games",
+          "greedy",
+          "sortings"
+        ],
+        "repeatFrom": 3,
+        "repeatCount": 1
+      },
+      {
+        "label": "H",
+        "contestId": 1046,
+        "index": "F",
+        "name": "Splitting money",
+        "rating": 1400,
+        "tags": [
+          "implementation"
+        ]
+      }
+    ],
+    "bonus": [
+      {
+        "label": "Bonus 1",
+        "problemJid": "JIDPROGajDUmMsqhKsGDAVvdRdg",
+        "set": "OSN-P Informatika 2026",
+        "setSlug": "osnp-2026",
+        "alias": "A",
+        "name": "Kotak Telur",
+        "url": "https://tlx.toki.id/problems/osnp-2026/A",
+        "repeatFrom": 1,
+        "repeatCount": 2
+      },
+      {
+        "label": "Bonus 2",
+        "problemJid": "JIDPROGbakiUcdR5WMNGPlaZB0B",
+        "set": "OSN-P Informatika 2024",
+        "setSlug": "osnp-2024",
+        "alias": "B",
+        "name": "Berbagi Banyak Candil",
+        "url": "https://tlx.toki.id/problems/osnp-2024/B"
+      }
+    ]
   }
 ]
