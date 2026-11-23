@@ -1,7 +1,7 @@
 {
   "tlx": {
     "username": "MarioKen",
-    "totalSubmissions": 418,
+    "totalSubmissions": 421,
     "problems": {},
     "courses": [
       {
@@ -258,13 +258,13 @@
             "alias": "09",
             "name": "Perkenalan Graf",
             "total": 7,
-            "solved": 1,
-            "attempted": 1,
-            "submissions": 2,
+            "solved": 2,
+            "attempted": 2,
+            "submissions": 5,
             "firstAt": 1794838121,
-            "lastAt": 1794838148,
+            "lastAt": 1795441714,
             "doneAt": null,
-            "activeDays": 1
+            "activeDays": 2
           },
           {
             "alias": "10",
@@ -325,7 +325,7 @@
     "contests": 3,
     "acCount": 90
   },
-  "updatedAt": "2026-11-16T18:32:07.552Z",
+  "updatedAt": "2026-11-23T20:13:31.333Z",
   "contestHistory": [
     {
       "platform": "AtCoder",
