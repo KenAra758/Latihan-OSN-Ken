@@ -1,7 +1,17 @@
 {
-  "updatedAt": "2026-11-23T02:56:46.760Z",
+  "updatedAt": "2026-11-24T06:14:24.226Z",
   "failed": [],
   "contests": [
+    {
+      "platform": "Codeforces",
+      "id": "2292",
+      "name": "Codeforces Round 1138 (Div. 3)",
+      "start": 1795790100,
+      "duration": 8100,
+      "url": "https://codeforces.com/contests",
+      "register": "https://codeforces.com/contestRegistration/2292",
+      "tier": "cocok"
+    },
     {
       "platform": "AtCoder",
       "name": "AtCoder Beginner Contest 486",
@@ -76,6 +86,16 @@
       "url": "https://atcoder.jp/contests/agc080",
       "register": null,
       "tier": "lanjut"
+    },
+    {
+      "platform": "Codeforces",
+      "id": "2293",
+      "name": "Educational Codeforces Round 197 (Rated for Div. 2)",
+      "start": 1797258900,
+      "duration": 7200,
+      "url": "https://codeforces.com/contests",
+      "register": "https://codeforces.com/contestRegistration/2293",
+      "tier": "cocok"
     },
     {
       "platform": "AtCoder",
