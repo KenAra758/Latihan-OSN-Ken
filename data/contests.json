@@ -1,17 +1,7 @@
 {
-  "updatedAt": "2026-11-27T04:23:44.139Z",
+  "updatedAt": "2026-11-28T04:03:59.813Z",
   "failed": [],
   "contests": [
-    {
-      "platform": "Codeforces",
-      "id": "2292",
-      "name": "Codeforces Round 1138 (Div. 3)",
-      "start": 1795790100,
-      "duration": 8100,
-      "url": "https://codeforces.com/contests",
-      "register": "https://codeforces.com/contestRegistration/2292",
-      "tier": "cocok"
-    },
     {
       "platform": "AtCoder",
       "name": "AtCoder Beginner Contest 486",
